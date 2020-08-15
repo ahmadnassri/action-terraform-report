@@ -1,0 +1,101 @@
+name: release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: action
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2.1.1
+        with:
+          node-version: 14
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: client-${{ hashFiles('**/package-lock.json') }}
+
+      # run test
+      - run: npm ci
+      - run: npm run test:100
+
+  release:
+    needs: test
+
+    runs-on: ubuntu-latest
+
+    outputs:
+      published: ${{ steps.release.outputs.published }}
+      release-version: ${{ steps.release.outputs.release-version }}
+      release-version-major: ${{ steps.release.outputs.release-version-major }}
+      release-version-minor: ${{ steps.release.outputs.release-version-minor }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - id: release
+        name: semantic-release
+        uses: ahmadnassri/action-semantic-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  alias:
+    needs: release
+    if: needs.release.outputs.published == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        alias:
+          - version: v${{ needs.release.outputs.release-version-major }}
+          - version: v${{ needs.release.outputs.release-version-major }}.${{ needs.release.outputs.release-version-minor }}
+
+    steps:
+      - uses: actions/github-script@v2
+        with:
+          script: |
+            const tag = 'tags/${{ matrix.alias.version }}'
+            const repo = {
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            }
+
+            await github.git.deleteRef({ ...repo, ref: tag }).catch(() => {})
+            await github.git.createRef({ ...repo, ref: `refs/${tag}` , sha: process.env.GITHUB_SHA })
+
+  publish:
+    needs: release
+    if: needs.release.outputs.published == 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        docker:
+          - name: docker hub
+            registry: registry.hub.docker.com
+            password: DOCKER_PASSWORD
+            repository: ${{ github.event.repository.full_name }}
+
+          - name: github package registry
+            password: GITHUB_TOKEN
+            registry: docker.pkg.github.com
+            repository: ${{ github.event.repository.full_name }}/${{ github.event.repository.name }}
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: ${{ matrix.docker.name }}
+        uses: docker/build-push-action@v1
+        with:
+          add_git_labels: true
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets[matrix.docker.password] }}
+          registry: ${{ matrix.docker.registry }}
+          repository: ${{ matrix.docker.repository }}
+          tags: latest, v${{ needs.release.outputs.release-version-major }}, ${{ needs.release.outputs.release-version }}

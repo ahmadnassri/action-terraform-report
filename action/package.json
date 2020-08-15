@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "name": "actions-terraform-report",
+  "version": "0.0.0-semantically-released",
+  "description": "Updates Pull Requests with visual diff of Terraform Plan changes",
+  "author": {
+    "name": "Ahmad Nassri",
+    "email": "ahmad@ahmadnassri.com",
+    "url": "https://ahmadnassri.com"
+  },
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "tap test --no-coverage",
+    "test:100": "tap test --100 --coverage-report=lcov --no-browser"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "@actions/github": "^4.0.0",
+    "diff": "^4.0.2",
+    "js-yaml": "^3.14.0"
+  },
+  "devDependencies": {
+    "sinon": "^9.0.3",
+    "tap": "^14.10.8"
+  }
+}

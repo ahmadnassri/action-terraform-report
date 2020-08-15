@@ -1,0 +1,19 @@
+name: Terraform Pull Request Report Generator
+description: Updates Pull Requests with visual diff of Terraform Plan changes
+
+branding:
+  color: red
+  icon: search
+
+inputs:
+  github-token:
+    description: The GitHub token used to update the pull-request
+    default: ${{ github.token }}
+
+  terraform-plan:
+    description: a Terraform JSON string
+    required: true
+
+runs:
+  using: docker
+  image: docker://ahmadnassri/action-terraform-report:v1
