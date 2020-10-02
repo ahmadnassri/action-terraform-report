@@ -15,7 +15,7 @@
     "test:100": "tap test --100 --coverage-report=lcov --no-browser"
   },
   "dependencies": {
-    "@actions/core": "^1.2.4",
+    "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
     "diff": "^4.0.2",
     "js-yaml": "^3.14.0"
