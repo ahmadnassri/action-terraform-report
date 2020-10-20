@@ -42,7 +42,7 @@ octokit.issues.createComment({
   ...github.context.repo,
   issue_number: pull_request.number,
   body: `
-  #### Run #[${runId}](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${runId}) from \`${github.context.sha}\` on \`${github.context.ref}\`
+  #### Run #[${runId}](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${runId}) from ${github.context.sha} on \`${github.context.ref}\`
   <details><summary>Show Diff</summary>
 
   ${diff}
