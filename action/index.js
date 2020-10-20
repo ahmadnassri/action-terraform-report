@@ -37,11 +37,18 @@ const fences = '```'
 
 const octokit = github.getOctokit(inputs.token)
 
-const diff = patches.map(patch => `${fences}diff\n${patch}\n${fences}`)
+const diff = patches.map(patch => `${fences}diff\n${patch}\n${fences}`).join('\n\n')
 
 // update PR
 octokit.issues.createComment({
   ...github.context.repo,
   issue_number: pull_request.number,
-  body: `<details><summary>result #${runId}</summary>\n${diff}\n</details>`
+  body: `
+  #### Run #[${runId}](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${runId})
+
+  <details><summary>Show Diff</summary>
+
+  ${diff}
+  </details>
+  `
 })
