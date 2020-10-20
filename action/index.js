@@ -33,19 +33,16 @@ const plan = require(inputs.plan)
 // process file
 const patches = unidiff(plan)
 
-const fences = '```'
-
 const octokit = github.getOctokit(inputs.token)
 
-const diff = patches.map(patch => `${fences}diff\n${patch}\n${fences}`).join('\n\n')
+const diff = patches.map(patch => `\`\`\`diff\n${patch}\n\`\`\``).join('\n\n')
 
 // update PR
 octokit.issues.createComment({
   ...github.context.repo,
   issue_number: pull_request.number,
   body: `
-  #### Run #[${runId}](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${runId})
-
+  #### Run #[${runId}](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${runId}) from \`${github.context.sha}\` on \`${github.context.ref}\`
   <details><summary>Show Diff</summary>
 
   ${diff}
