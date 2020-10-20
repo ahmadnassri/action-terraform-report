@@ -7,13 +7,17 @@ branding:
 
 inputs:
   github-token:
-    description: The GitHub token used to update the pull-request
+    description: The GitHub token used to post comments on pull requests
     default: ${{ github.token }}
 
-  terraform-plan:
-    description: a Terraform JSON string
+  terraform-text:
+    description: path to Terraform Plan text output file
+    required: true
+
+  terraform-json:
+    description: path to Terraform Plan JSON output file
     required: true
 
 runs:
   using: docker
-  image: docker://ahmadnassri/action-terraform-report:v1
+  image: docker://ahmadnassri/action-terraform-report:v2

@@ -34,28 +34,32 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: hashicorp/setup-terraform@v1
-      - run: terraform init
-      - run: terraform validate
-      - run: terraform plan -lock=false -out terraform.plan
-      - run: terraform show -json terraform.plan
-        id: show
-      # store output into a file
-      - run: |
-          cat > terraform.json << 'EOM'
-          ${{ steps.show.outputs.stdout }}
-          EOM
-
-      - uses: ahmadnassri/action-terraform-report@v1
         with:
-          # tell the action where to find the json file
-          terraform-plan: ${{ github.workspace }}/terraform.json
+          terraform_wrapper: false
+
+      - run: terraform init
+      - run: terraform plan -lock=false -out terraform.plan
+
+      # generate plain output
+      - run: terraform show -no-color terraform.plan > terraform.text
+
+      # generate json output
+      - run: terraform show -json terraform.plan > terraform.json
+
+      - uses: ahmadnassri/action-terraform-report@v2
+        with:
+          # tell the action the plan outputs
+          terraform-text: ${{ github.workspace }}/terraform.text
+          terraform-json: ${{ github.workspace }}/terraform.json
 ```
+
+> **Note**: Ensure `terraform_wrapper` is set to `false` to better capture the output into a file _(or use your own method)_
 
 ### Inputs
 
-| input            | required | default        | description                                                   |
-| ---------------- | -------- | -------------- | ------------------------------------------------------------- |
-| `terraform-plan` | ✔        | `-`            | path to [Terraform JSON] file generated with `terraform show` |
-| `github-token`   | ❌       | `github.token` | The GitHub token used to update the pull-request              |
+| input            | required | default        | description                                                                           |
+| ---------------- | -------- | -------------- | ------------------------------------------------------------------------------------- |
+| `terraform-text` | ✔        | `-`            | path to the file resulting from the output of `terraform show /path/to/plan`          |
+| `terraform-json` | ✔        | `-`            | path to the file resulting from the output of `terraform show -json /path/to/plan`    |
+| `github-token`   | ❌       | `github.token` | The GitHub token used to post comments on pull requests                               |
 
-[Terraform JSON]: https://www.terraform.io/docs/configuration/syntax-json.html
