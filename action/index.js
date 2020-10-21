@@ -44,7 +44,7 @@ const json = await readFile(inputs.json)
 const data = JSON.parse(json)
 
 // process file
-const patches = unidiff(data)
+const { summary, patches } = unidiff(data)
 
 const octokit = github.getOctokit(inputs.token)
 
@@ -56,6 +56,8 @@ await octokit.issues.createComment({
   issue_number: pull_request.number,
   body: `
   #### Run #[${runId}](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${runId}) from ${github.context.sha} on \`${github.context.ref}\`
+
+  ##### Plan: \`${summary.create}\` to add, \`${summary.update}\` to change, \`${summary.delete}\` to destroy
 
   <details><summary>Terraform Plan</summary>
 
