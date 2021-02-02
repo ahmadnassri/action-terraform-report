@@ -12,9 +12,11 @@ const run = promisify(exec)
 
 // parse inputs
 const inputs = {
+  diff: core.getInput('show-diff'),
+  plan: core.getInput('show-plan'),
   text: core.getInput('terraform-text', { required: true }),
   json: core.getInput('terraform-json', { required: true }),
-  token: core.getInput('github-token', { required: true })
+  token: core.getInput('github-token', { required: true }),
 }
 
 // error handler
@@ -50,25 +52,35 @@ const octokit = github.getOctokit(inputs.token)
 
 const diff = patches.map(patch => `\`\`\`diff\n${patch}\n\`\`\``).join('\n\n')
 
-// update PR
-await octokit.issues.createComment({
-  ...github.context.repo,
-  issue_number: pull_request.number,
-  body: `
-  #### Run #[${runId}](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${runId}) from ${github.context.sha} on \`${github.context.ref}\`
+let body = `
+#### Run #[${runId}](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${runId}) from ${github.context.sha} on \`${github.context.ref}\`
 
-  ##### Plan: \`${summary.create}\` to add, \`${summary.update}\` to change, \`${summary.delete}\` to destroy
+##### Plan: \`${summary.create}\` to add, \`${summary.update}\` to change, \`${summary.delete}\` to destroy
+`
 
+if (inputs.plan) {
+  body += `
   <details><summary>Terraform Plan</summary>
 
   \`\`\`terraform
   ${text}
   \`\`\`
   </details>
+  `
+}
 
+if (inputs.diff) {
+  body += `
   <details><summary>Show Diff</summary>
 
   ${diff}
   </details>
   `
+}
+
+// update PR
+await octokit.issues.createComment({
+  ...github.context.repo,
+  issue_number: pull_request.number,
+  body
 })

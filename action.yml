@@ -18,6 +18,14 @@ inputs:
     description: path to Terraform Plan JSON output file
     required: true
 
+  show-diff:
+    description: include the diff view in the final output?
+    default: false
+
+  show-plan:
+    description: include the terraform plan view in the final output?
+    default: true
+
 runs:
   using: docker
-  image: docker://ahmadnassri/action-terraform-report:v2
+  image: docker://ghcr.io/ahmadnassri/action-terraform-report
