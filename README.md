@@ -47,7 +47,7 @@ jobs:
 ### Inputs
 
 | input            | required | default        | description                                                                        |
-|------------------|----------|----------------|------------------------------------------------------------------------------------|
+| ---------------- | -------- | -------------- | ---------------------------------------------------------------------------------- |
 | `terraform-text` | ✔        | `-`            | path to the file resulting from the output of `terraform show /path/to/plan`       |
 | `terraform-json` | ✔        | `-`            | path to the file resulting from the output of `terraform show -json /path/to/plan` |
 | `github-token`   | ❌        | `github.token` | The GitHub token used to post comments on pull requests                            |
