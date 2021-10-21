@@ -54,6 +54,20 @@ jobs:
 | `show-plan`      | ❌        | `true`         | include the terraform plan view in the final output?                               |
 | `show-diff`      | ❌        | `false`        | include the diff view in the final output?                                         |
 
+## Examples
+
+| Pull Request Comment *(default)* |
+|----------------------------------|
+| ![](./docs/1.png)                |
+
+| Pull Request Comment *(Plan)* |
+|-------------------------------|
+| ![](./docs/2.png)             |
+
+| Pull Request Comment *(Diff)* |
+|-------------------------------|
+| ![](./docs/3.png)             |
+
 ----
 > Author: [Ahmad Nassri](https://www.ahmadnassri.com/) &bull;
 > Twitter: [@AhmadNassri](https://twitter.com/AhmadNassri)

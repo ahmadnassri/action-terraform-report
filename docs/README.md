@@ -43,3 +43,17 @@ jobs:
 | `github-token`   | ❌        | `github.token` | The GitHub token used to post comments on pull requests                            |
 | `show-plan`      | ❌        | `true`         | include the terraform plan view in the final output?                               |
 | `show-diff`      | ❌        | `false`        | include the diff view in the final output?                                         |
+
+## Examples
+
+| Pull Request Comment _(default)_ |
+| ---------------------------------| 
+| ![](./docs/1.png)                |
+
+| Pull Request Comment _(Plan)_ |
+| ------------------------------| 
+| ![](./docs/2.png)             |
+
+| Pull Request Comment _(Diff)_ |
+| ------------------------------| 
+| ![](./docs/3.png)             |

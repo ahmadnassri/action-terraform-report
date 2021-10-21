@@ -27,5 +27,5 @@ inputs:
     default: true
 
 runs:
-  using: docker
-  image: docker://ghcr.io/ahmadnassri/action-terraform-report
+  using: node12
+  main: dist/index.js
