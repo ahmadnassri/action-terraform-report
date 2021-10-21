@@ -4,7 +4,7 @@
 const core = require('@actions/core')
 const github = require('@actions/github')
 const unidiff = require('@ahmadnassri/terraform-unidiff')
-const { readFile } = require('fs/promises')
+const { promises: { readFile } } = require('fs')
 
 // parse inputs
 const inputs = {

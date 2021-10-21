@@ -22350,14 +22350,6 @@ module.exports = require("fs");
 
 /***/ }),
 
-/***/ 9225:
-/***/ ((module) => {
-
-"use strict";
-module.exports = require("fs/promises");
-
-/***/ }),
-
 /***/ 8605:
 /***/ ((module) => {
 
@@ -22485,7 +22477,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186)
 const github = __nccwpck_require__(5438)
 const unidiff = __nccwpck_require__(3328)
-const { readFile } = __nccwpck_require__(9225)
+const { promises: { readFile } } = __nccwpck_require__(5747)
 
 // parse inputs
 const inputs = {
