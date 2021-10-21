@@ -57,29 +57,29 @@ async function main () {
   const diff = patches.map(patch => `\`\`\`diff\n${patch}\n\`\`\``).join('\n\n')
 
   let body = `
-  #### Run #[${runId}](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${runId}) from ${github.context.sha} on \`${github.context.ref}\`
+#### Run #[${runId}](https://github.com/${github.context.repo.owner}/${github.context.repo.repo}/actions/runs/${runId}) from ${github.context.sha} on \`${github.context.ref}\`
 
-  ##### Plan: \`${summary.create}\` to add, \`${summary.update}\` to change, \`${summary.delete}\` to destroy
+##### Plan: \`${summary.create}\` to add, \`${summary.update}\` to change, \`${summary.delete}\` to destroy
   `
 
   if (inputs.plan) {
     body += `
-    <details><summary>Terraform Plan</summary>
+<details><summary>Terraform Plan</summary>
 
-    \`\`\`terraform
-    ${text}
-    \`\`\`
-    </details>
-    `
+\`\`\`terraform
+${text}
+\`\`\`
+</details>
+`
   }
 
   if (inputs.diff) {
     body += `
-    <details><summary>Show Diff</summary>
+<details><summary>Show Diff</summary>
 
-    ${diff}
-    </details>
-    `
+${diff}
+</details>
+`
   }
 
   // update PR
