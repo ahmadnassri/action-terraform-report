@@ -2,10 +2,6 @@ name: test
 
 on: [ push, pull_request ]
 
-defaults:
-  run:
-    working-directory: action
-
 jobs:
   deduplicate:
     timeout-minutes: 5
@@ -17,7 +13,6 @@ jobs:
 
     steps:
       - run: echo ::warning ::skipped duplicate run
-        working-directory: .
 
   audit:
     timeout-minutes: 5
