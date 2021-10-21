@@ -35,7 +35,7 @@ jobs:
       # generate json output
       - run: terraform show -json terraform.plan > terraform.json
 
-      - uses: ahmadnassri/action-terraform-report@v2
+      - uses: ahmadnassri/action-terraform-report@v3
         with:
           # tell the action the plan outputs
           terraform-text: ${{ github.workspace }}/terraform.text
