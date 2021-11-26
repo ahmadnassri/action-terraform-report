@@ -62,7 +62,7 @@ async function main () {
 ##### Plan: \`${summary.create}\` to add, \`${summary.update}\` to change, \`${summary.delete}\` to destroy
   `
 
-  if (inputs.plan) {
+  if (inputs.plan === 'true') {
     body += `
 <details><summary>Terraform Plan</summary>
 
@@ -73,7 +73,7 @@ ${text}
 `
   }
 
-  if (inputs.diff) {
+  if (inputs.diff === 'true') {
     body += `
 <details><summary>Show Diff</summary>
 
