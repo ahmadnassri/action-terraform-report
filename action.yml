@@ -26,6 +26,10 @@ inputs:
     description: include the terraform plan view in the final output?
     default: true
 
+  remove-stale-reports:
+    description: remove report comments for old commits?
+    default: false
+
 runs:
   using: node12
   main: dist/index.js
