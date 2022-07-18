@@ -29,6 +29,12 @@ if (!inputs.text || !inputs.json || !inputs.token) {
   process.exit(1)
 }
 
+// exit
+if (!pull_request) {
+  core.warning('not a pull request. exiting.')
+  process.exit(0)
+}
+
 // exit early
 if (pull_request.state !== 'open') {
   core.warning('action triggered on a closed pull request')
