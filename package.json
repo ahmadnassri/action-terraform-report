@@ -1,24 +1,43 @@
 {
   "private": true,
-  "name": "actions-terraform-report",
   "version": "0.0.0-semantically-released",
+  "name": "actions-terraform-report",
   "description": "Updates Pull Requests with visual diff of Terraform Plan changes",
-  "author": {
-    "name": "Ahmad Nassri",
-    "email": "ahmad@ahmadnassri.com",
-    "url": "https://ahmadnassri.com"
+  "author": "Ahmad Nassri <email@ahmadnassri.com> (https://www.ahmadnassri.com)",
+  "homepage": "https://github.com/ahmadnassri/action-terraform-report",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmadnassri/action-terraform-report.git"
   },
+  "bugs": {
+    "url": "https://github.com/ahmadnassri/action-terraform-report/issues"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/ahmadnassri"
+  },
+  "license": "MIT",
+  "keywords": [
+    "terraform",
+    "report",
+    "action"
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "index.js",
   "scripts": {
     "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
-    "test": "echo nothing to test && exit 0",
-    "test:ci": "echo nothing to test && exit 0"
+    "test": "tap test --no-coverage",
+    "test:watch": "tap test --watch",
+    "test:ci": "tap test --100",
+    "test:report": "opener coverage/lcov-report/index.html"
   },
-  "main": "index.js",
-  "license": "MIT",
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0",
-    "@ahmadnassri/terraform-unidiff": "^2.0.8",
-    "@vercel/ncc": "^0.31.1"
+    "@actions/core": "^1.9.1",
+    "@actions/github": "^5.0.3",
+    "@ahmadnassri/terraform-unidiff": "^3.0.0",
+    "@vercel/ncc": "^0.34.0",
+    "tap": "^16.3.0"
   }
 }
