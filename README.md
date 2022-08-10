@@ -4,8 +4,6 @@ Updates Pull Requests with visual diff of Terraform Plan changes
 
 [![license][license-img]][license-url]
 [![release][release-img]][release-url]
-[![super linter][super-linter-img]][super-linter-url]
-[![test][test-img]][test-url]
 [![semantic][semantic-img]][semantic-url]
 
 ## Usage
@@ -58,15 +56,19 @@ jobs:
 
 | Pull Request Comment *(default)* |
 |----------------------------------|
-| ![](./docs/1.png)                |
+| ![][1]                           |
 
 | Pull Request Comment *(Plan)* |
 |-------------------------------|
-| ![](./docs/2.png)             |
+| ![][2]                        |
 
 | Pull Request Comment *(Diff)* |
 |-------------------------------|
-| ![](./docs/3.png)             |
+| ![][3]                        |
+
+  [1]: ./docs/1.png
+  [2]: ./docs/2.png
+  [3]: ./docs/3.png
 
 ----
 > Author: [Ahmad Nassri](https://www.ahmadnassri.com/) &bull;
@@ -77,12 +79,6 @@ jobs:
 
 [release-url]: https://github.com/ahmadnassri/action-terraform-report/releases
 [release-img]: https://badgen.net/github/release/ahmadnassri/action-terraform-report
-
-[super-linter-url]: https://github.com/ahmadnassri/action-terraform-report/actions?query=workflow%3Asuper-linter
-[super-linter-img]: https://github.com/ahmadnassri/action-terraform-report/workflows/super-linter/badge.svg
-
-[test-url]: https://github.com/ahmadnassri/action-terraform-report/actions?query=workflow%3Atest
-[test-img]: https://github.com/ahmadnassri/action-terraform-report/workflows/test/badge.svg
 
 [semantic-url]: https://github.com/ahmadnassri/action-terraform-report/actions?query=workflow%3Arelease
 [semantic-img]: https://badgen.net/badge/📦/semantically%20released/blue

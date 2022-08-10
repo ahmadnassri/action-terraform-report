@@ -1,0 +1,174 @@
+# -------------------------------------------------- #
+# Note: this file originates in template-action-node #
+# -------------------------------------------------- #
+
+on:
+  - push
+  - workflow_dispatch
+
+name: push
+
+jobs:
+  metadata:
+    runs-on: ubuntu-latest
+
+    outputs:
+      repository_is_template: ${{ steps.metadata.outputs.repository_is_template }}
+      repository_default_branch: ${{ steps.metadata.outputs.repository_default_branch }}
+
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: metadata
+        uses: ahmadnassri/action-metadata@v2.1.1
+
+  commit-lint:
+    timeout-minutes: 5
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ahmadnassri/action-commit-lint@v1
+        with:
+          config: .github/linters/.commit-lint.yml
+
+  super-linter:
+    timeout-minutes: 5
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: github/super-linter/slim@v4
+        env:
+          LOG_LEVEL: ERROR
+          VALIDATE_JSCPD: 'false'
+          VALIDATE_ALL_CODEBASE: 'false'
+          IGNORE_GITIGNORED_FILES: 'true'
+          FILTER_REGEX_EXCLUDE: '/github/workspace/README.md|test/fixtures/*'
+          GITHUB_TOKEN: ${{ github.token }}
+
+  npm-audit:
+    timeout-minutes: 5
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3.4.1
+        with:
+          node-version: latest
+
+      - run: npm audit --audit-level=critical
+
+  test:
+    needs:
+      - npm-audit
+      - test-strategy
+
+    timeout-minutes: 5
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - uses: actions/setup-node@v3.4.1
+        with:
+          registry-url: https://npm.pkg.github.com
+          node-version: latest
+          cache: npm
+
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: npm run test:ci
+
+  release:
+    needs:
+      - test
+      - metadata
+      - commit-lint
+      - super-linter
+
+    # only runs on main branch for non template repos
+    if: |
+      needs.metadata.outputs.repository_is_template == 'false' &&
+      needs.metadata.outputs.repository_default_branch == github.ref_name
+
+    timeout-minutes: 20
+
+    runs-on: ubuntu-latest
+
+    outputs:
+      published: ${{ steps.release.outputs.published }}
+      version: ${{ steps.release.outputs.release-version }}
+      version-major: ${{ steps.release.outputs.release-version-major }}
+      version-minor: ${{ steps.release.outputs.release-version-minor }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - id: release
+        uses: ahmadnassri/action-semantic-release@v2
+        with:
+          config: ${{ github.workspace }}/.semantic.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  alias:
+    needs: release
+
+    if: ${{ needs.release.outputs.published == 'true' }}
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        alias:
+          - version: v${{ needs.release.outputs.release-version-major }}
+          - version: v${{ needs.release.outputs.release-version-major }}.${{ needs.release.outputs.release-version-minor }}
+
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            const tag = 'tags/${{ matrix.alias.version }}'
+            await github.git.deleteRef({ ...context.repo, ref: tag }).catch(() => {})
+            await github.git.createRef({ ...context.repo, ref: `refs/${tag}` , sha: process.env.GITHUB_SHA })
+
+  template-sync:
+    timeout-minutes: 20
+
+    needs:
+      - metadata
+      - test-run
+      - commit-lint
+      - super-linter
+
+    # only runs on main branch for template repos
+    if: |
+      needs.metadata.outputs.repository_is_template == 'true' &&
+      needs.metadata.outputs.repository_default_branch == github.ref_name
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: ahmadnassri/action-workflow-queue@v1.1
+
+      - uses: actions/checkout@v3
+
+      - uses: ahmadnassri/action-template-repository-sync@v1.6.0
+        with:
+          github-token: ${{ secrets.GH_TOKEN }}
