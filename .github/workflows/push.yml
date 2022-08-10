@@ -71,7 +71,6 @@ jobs:
   test:
     needs:
       - npm-audit
-      - test-strategy
 
     timeout-minutes: 5
 
@@ -152,8 +151,8 @@ jobs:
     timeout-minutes: 20
 
     needs:
+      - test
       - metadata
-      - test-run
       - commit-lint
       - super-linter
 
