@@ -18,7 +18,7 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
-    "@ahmadnassri/terraform-unidiff": "^2.0.8",
+    "@ahmadnassri/terraform-unidiff": "^3.0.0",
     "@vercel/ncc": "^0.31.1"
   }
 }
