@@ -14,7 +14,7 @@ test('context', async assert => {
   process.env['INPUT_TERRAFORM-TEXT'] = join(root, 'fixtures/terraform.txt')
   process.env['INPUT_TERRAFORM-JSON'] = join(root, 'fixtures/terraform.json')
 
-  process.env.GITHUB_EVENT_PATH = join(root, 'fixtures/payloads/pull_request/opened.payload.json')
+  process.env.GITHUB_EVENT_PATH = join(root, 'fixtures/opened.payload.json')
 
   const { default: context } = await import('../lib/context.js')
   const data = context()
