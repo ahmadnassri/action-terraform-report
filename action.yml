@@ -29,6 +29,11 @@ inputs:
     default: "true"
     required: false
 
+  remove-stale-reports:
+    description: remove report comments for old commits?
+    default: "false"
+    required: false
+
 runs:
   using: node12
   main: dist/index.js

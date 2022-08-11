@@ -6,6 +6,7 @@ import context from './lib/context.js'
 import parse from './lib/parse.js'
 import report from './lib/report.js'
 import post from './lib/post.js'
+import stale from './lib/stale.js'
 
 // error handler
 function errorHandler (err) {
@@ -21,4 +22,8 @@ process.on('uncaughtException', errorHandler)
 const data = context()
 await parse(data)
 report(data)
+
+if (data.removeStaleReports) {
+  await stale(data)
+}
 post(data)
