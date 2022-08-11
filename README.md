@@ -38,19 +38,21 @@ jobs:
           # tell the action the plan outputs
           terraform-text: ${{ github.workspace }}/terraform.text
           terraform-json: ${{ github.workspace }}/terraform.json
+          remove-stale-reports: true
 ```
 
 > **Note**: Ensure `terraform_wrapper` is set to `false` to better capture the output into a file *(or use your own method)*
 
 ### Inputs
 
-| input            | required | default        | description                                                                        |
-|------------------|----------|----------------|------------------------------------------------------------------------------------|
-| `terraform-text` | ✔        | `-`            | path to the file resulting from the output of `terraform show /path/to/plan`       |
-| `terraform-json` | ✔        | `-`            | path to the file resulting from the output of `terraform show -json /path/to/plan` |
-| `github-token`   | ❌        | `github.token` | The GitHub token used to post comments on pull requests                            |
-| `show-plan`      | ❌        | `true`         | include the terraform plan view in the final output?                               |
-| `show-diff`      | ❌        | `false`        | include the diff view in the final output?                                         |
+| input                  | required | default        | description                                                                        |
+|------------------------|----------|----------------|------------------------------------------------------------------------------------|
+| `terraform-text`       | ✅        | `-`            | path to the file resulting from the output of `terraform show /path/to/plan`       |
+| `terraform-json`       | ✅        | `-`            | path to the file resulting from the output of `terraform show -json /path/to/plan` |
+| `github-token`         | ❌        | `github.token` | The GitHub token used to post comments on pull requests                            |
+| `show-plan`            | ❌        | `true`         | include the terraform plan view in the final output?                               |
+| `show-diff`            | ❌        | `false`        | include the diff view in the final output?                                         |
+| `remove-stale-reports` | ❌        | `false`        | remove report comments for old commits?                                            |
 
 ## Examples
 

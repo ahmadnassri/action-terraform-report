@@ -23,7 +23,7 @@ const data = context()
 await parse(data)
 report(data)
 
-if (data.removeStaleReports) {
+if (data.removeStaleReports === 'true') {
   await stale(data)
 }
 post(data)

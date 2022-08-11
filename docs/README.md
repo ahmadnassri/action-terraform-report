@@ -30,6 +30,7 @@ jobs:
           # tell the action the plan outputs
           terraform-text: ${{ github.workspace }}/terraform.text
           terraform-json: ${{ github.workspace }}/terraform.json
+          remove-stale-reports: true
 ```
 
 > **Note**: Ensure `terraform_wrapper` is set to `false` to better capture the output into a file _(or use your own method)_
