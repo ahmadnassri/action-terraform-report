@@ -104821,7 +104821,7 @@ async function stale (data) {
 
   const {
     data: results
-  } = await octokit.issues.listComments(_extends({}, repo, {
+  } = await octokit.rest.issues.listComments(_extends({}, repo, {
     issue_number
   })); // get action comments
 
