@@ -1,6 +1,6 @@
-import { URL, fileURLToPath } from 'node:url'
-import { readFile } from 'node:fs/promises'
-import { join } from 'node:path'
+import { URL, fileURLToPath } from 'url'
+import { readFile } from 'fs/promises'
+import { join } from 'path'
 
 import { test } from 'tap'
 
@@ -30,8 +30,10 @@ test('context', async assert => {
     showPlan: 'true',
     showDiff: 'true',
     textContent: 'foobar',
-    patches: ['foo'],
-    summary: { create: 0, update: 1, delete: 0 }
+    diff: {
+      patches: ['foo'],
+      summary: { create: 0, update: 1, delete: 0 }
+    }
   }
 
   report(data)

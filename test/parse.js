@@ -1,5 +1,5 @@
-import { URL, fileURLToPath } from 'node:url'
-import { join } from 'node:path'
+import { URL, fileURLToPath } from 'url'
+import { join } from 'path'
 
 import { test } from 'tap'
 

@@ -28,8 +28,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
-    "build": "npm run prepare",
+    "build": "microbundle --no-pkg-main --no-sourcemap --external none --target node --format esm --entry index.js --output dist/index.js",
     "test": "tap test --no-coverage",
     "test:watch": "tap test --watch",
     "test:ci": "tap test --100",
@@ -38,8 +37,10 @@
   "dependencies": {
     "@actions/core": "^1.9.1",
     "@actions/github": "^5.0.3",
-    "@ahmadnassri/terraform-unidiff": "^3.0.0",
-    "@vercel/ncc": "^0.34.0",
+    "@ahmadnassri/terraform-unidiff": "^3.0.0"
+  },
+  "devDependencies": {
+    "microbundle": "^0.15.0",
     "tap": "^16.3.0"
   }
 }
