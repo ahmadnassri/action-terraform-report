@@ -15,7 +15,7 @@ services:
       MULTI_STATUS: 'false'
       IGNORE_GITIGNORED_FILES: 'true'
       DEFAULT_WORKSPACE: /github/workspace
-      FILTER_REGEX_EXCLUDE: '/github/workspace/README.md|test/fixtures/*'
+      FILTER_REGEX_EXCLUDE: '/github/workspace/README.md|test/fixtures/*|dist/**'
 
   # ---- readme generator ---- #
   readme:

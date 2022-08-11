@@ -51,7 +51,7 @@ jobs:
           VALIDATE_JSCPD: 'false'
           VALIDATE_ALL_CODEBASE: 'false'
           IGNORE_GITIGNORED_FILES: 'true'
-          FILTER_REGEX_EXCLUDE: '/github/workspace/README.md|test/fixtures/*'
+          FILTER_REGEX_EXCLUDE: '/github/workspace/README.md|test/fixtures/*|dist/**'
           GITHUB_TOKEN: ${{ github.token }}
 
   npm-audit:
@@ -136,8 +136,8 @@ jobs:
     strategy:
       matrix:
         alias:
-          - version: v${{ needs.release.outputs.release-version-major }}
-          - version: v${{ needs.release.outputs.release-version-major }}.${{ needs.release.outputs.release-version-minor }}
+          - version: v${{ needs.release.outputs.version-major }}
+          - version: v${{ needs.release.outputs.version-major }}.${{ needs.release.outputs.version-minor }}
 
     steps:
       - uses: actions/github-script@v6

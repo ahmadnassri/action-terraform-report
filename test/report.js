@@ -14,7 +14,8 @@ test('context', async assert => {
 
   process.env['INPUT_TERRAFORM-TEXT'] = join(root, 'fixtures/terraform.txt')
   process.env['INPUT_TERRAFORM-JSON'] = join(root, 'fixtures/terraform.json')
-  process.env['GITHUB_EVENT_PATH'] = join(root, 'fixtures/payloads/pull_request/opened.payload.json')
+
+  process.env.GITHUB_EVENT_PATH = join(root, 'fixtures/payloads/pull_request/opened.payload.json')
 
   process.env.GITHUB_REPOSITORY = 'foo/bar'
   process.env.GITHUB_SHA = 'sha'
