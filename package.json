@@ -29,6 +29,7 @@
   "type": "module",
   "scripts": {
     "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
+    "build": "npm run prepare",
     "test": "tap test --no-coverage",
     "test:watch": "tap test --watch",
     "test:ci": "tap test --100",
