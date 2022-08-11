@@ -144,8 +144,8 @@ jobs:
         with:
           script: |
             const tag = 'tags/${{ matrix.alias.version }}'
-            await github.git.deleteRef({ ...context.repo, ref: tag }).catch(() => {})
-            await github.git.createRef({ ...context.repo, ref: `refs/${tag}` , sha: process.env.GITHUB_SHA })
+            await github.rest.git.deleteRef({ ...context.repo, ref: tag }).catch(() => {})
+            await github.rest.git.createRef({ ...context.repo, ref: `refs/${tag}` , sha: process.env.GITHUB_SHA })
 
   template-sync:
     timeout-minutes: 20
