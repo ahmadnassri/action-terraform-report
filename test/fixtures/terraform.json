@@ -1,0 +1,30 @@
+{
+  "format_version": "xxx",
+  "terraform_version": "yyy",
+  "resource_changes": [
+    {
+      "address": "module.foo.bar",
+      "change": {
+        "actions": ["no-op"],
+        "before": {
+          "foo": "bar"
+        },
+        "after": {
+          "foo": "bar"
+        }
+      }
+    },
+    {
+      "address": "module.foo.baz",
+      "change": {
+        "actions": ["update"],
+        "before": {
+          "foo": "bar"
+        },
+        "after": {
+          "foo": "baz"
+        }
+      }
+    }
+  ]
+}

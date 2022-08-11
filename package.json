@@ -26,6 +26,7 @@
     "lib"
   ],
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
     "test": "tap test --no-coverage",
