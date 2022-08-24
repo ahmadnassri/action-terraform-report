@@ -5,6 +5,7 @@
 services:
   # ---- mega-linter ---- #
   lint:
+    profiles: ["dev"]
     image: oxsecurity/megalinter-javascript:v6
     volumes:
       - ./:/tmp/lint
@@ -30,9 +31,10 @@ services:
         source: .
         target: /app
     working_dir: /app
-    command: npm --no-update-notifier run test -- --reporter=classic
+    command: npm --no-update-notifier run start
 
   test:
     <<: *app
     profiles: ["test"]
     image: node:alpine
+    command: npm --no-update-notifier run test -- --reporter=classic
