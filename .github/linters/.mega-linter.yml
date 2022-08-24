@@ -17,3 +17,7 @@ MARKDOWN_MARKDOWNLINT_CONFIG_FILE: .markdown-lint.yml
 PRINT_ALPACA: false
 SHOW_ELAPSED_TIME: true
 VALIDATE_ALL_CODEBASE: false
+IGNORE_GENERATED_FILES: true
+FILTER_REGEX_EXCLUDE: (dist/*|docs/README.md|test/fixtures/*)
+
+DISABLE_ERRORS: true # TODO: disable once https://github.com/oxsecurity/megalinter/pull/1798 is merged
