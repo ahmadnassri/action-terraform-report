@@ -40,7 +40,7 @@
     "@ahmadnassri/terraform-unidiff": "^3.0.0"
   },
   "devDependencies": {
-    "microbundle": "^0.15.0",
+    "microbundle": "^0.15.1",
     "tap": "^16.3.0"
   }
 }
