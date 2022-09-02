@@ -131,7 +131,7 @@ jobs:
         with:
           config: ${{ github.workspace }}/.semantic.json
         env:
-          GITHUB_TOKEN: ${{ secrets.token }}
+          GITHUB_TOKEN: ${{ github.token }}
 
   alias:
     needs: release
