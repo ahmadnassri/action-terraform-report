@@ -139,19 +139,21 @@ jobs:
     if: ${{ needs.release.outputs.published == 'true' }}
 
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        alias:
-          - version: v${{ needs.release.outputs.version-major }}
-          - version: v${{ needs.release.outputs.version-major }}.${{ needs.release.outputs.version-minor }}
+        release: [ "v${{ needs.release.outputs.version }}" ]
+        alias: 
+          - "v${{ needs.release.outputs.version-major }}"
+          - "v${{ needs.release.outputs.version-major }}.${{ needs.release.outputs.version-minor }}"
 
     steps:
       - uses: actions/github-script@v6
         with:
           script: |
-            const tag = 'tags/${{ matrix.alias.version }}'
-            await github.rest.git.deleteRef({ ...context.repo, ref: tag }).catch(() => {})
-            await github.rest.git.createRef({ ...context.repo, ref: `refs/${tag}` , sha: process.env.GITHUB_SHA })
+            const { object: { sha } } = github.rest.git.getRef({ ...context.repo, ref: 'tags/${{ matrix.release }}' })
+            await github.rest.git.deleteRef({ ...context.repo, ref: 'tags/${{ matrix.alias }}' }).catch(() => {})
+            await github.rest.git.createRef({ ...context.repo, ref: 'refs/tags/${{ matrix.alias }}', sha })
 
   template-sync:
     timeout-minutes: 20
