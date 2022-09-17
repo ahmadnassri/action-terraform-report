@@ -19,11 +19,17 @@ function errorHandler (err) {
 process.on('unhandledRejection', errorHandler)
 process.on('uncaughtException', errorHandler)
 
+// grab action context
 const data = context()
+
+// parse plan content
 await parse(data)
+
+// generate report markdown
 report(data)
 
-if (data.removeStaleReports === 'true') {
-  await stale(data)
-}
+// remove stale comment
+if (data.removeStaleReports === 'true') await stale(data)
+
+// post new comment
 post(data)
