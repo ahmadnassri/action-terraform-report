@@ -35,7 +35,7 @@
     "test:report": "opener coverage/lcov-report/index.html"
   },
   "dependencies": {
-    "@actions/core": "^1.9.1",
+    "@actions/core": "^1.10.0",
     "@actions/github": "^5.0.3",
     "@ahmadnassri/terraform-unidiff": "^3.0.4"
   },
