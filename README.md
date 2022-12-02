@@ -45,14 +45,15 @@ jobs:
 
 ### Inputs
 
-| input                  | required | default        | description                                                                        |
-|------------------------|----------|----------------|------------------------------------------------------------------------------------|
-| `terraform-text`       | ✅        | `-`            | path to the file resulting from the output of `terraform show /path/to/plan`       |
-| `terraform-json`       | ✅        | `-`            | path to the file resulting from the output of `terraform show -json /path/to/plan` |
-| `github-token`         | ❌        | `github.token` | The GitHub token used to post comments on pull requests                            |
-| `show-plan`            | ❌        | `true`         | include the terraform plan view in the final output?                               |
-| `show-diff`            | ❌        | `false`        | include the diff view in the final output?                                         |
-| `remove-stale-reports` | ❌        | `false`        | remove report comments for old commits?                                            |
+| input                  | required | default                    | description                                                                        |
+|------------------------|----------|----------------------------|------------------------------------------------------------------------------------|
+| `terraform-text`       | ✅       | `-`                        | path to the file resulting from the output of `terraform show /path/to/plan`       |
+| `terraform-json`       | ✅       | `-`                        | path to the file resulting from the output of `terraform show -json /path/to/plan` |
+| `github-token`         | ❌       | `github.token`             | The GitHub token used to post comments on pull requests                            |
+| `show-plan`            | ❌       | `true`                     | include the terraform plan view in the final output?                               |
+| `show-diff`            | ❌       | `false`                    | include the diff view in the final output?                                         |
+| `remove-stale-reports` | ❌       | `false`                    | remove report comments for old commits?                                            |
+| `custom-header`        | ❌       | `:robot: Terraform Report` | The header text for the github comment                                             |
 
 ## Examples
 
