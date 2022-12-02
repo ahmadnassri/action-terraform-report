@@ -34,6 +34,11 @@ inputs:
     default: "false"
     required: false
 
+  custom-header:
+    description: The header text for the github comment
+    default: ":robot: Terraform Report"
+    required: false
+
 runs:
   using: node16
   main: dist/index.js
