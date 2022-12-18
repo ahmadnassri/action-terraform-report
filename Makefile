@@ -17,8 +17,11 @@ readme: ## pull latest containers
 lint: ## run super-linter
 	@docker compose run --rm lint
 
+build: ## compile action
+	@docker compose run --rm app npm run build
+
 install: ## install all dependencies
-	@docker compose run --rm -e NPM_TOKEN=$(NPM_TOKEN) -e GITHUB_TOKEN=$(GITHUB_TOKEN) -v $(NPMRC):/root/.npmrc node npm install --no-fund --no-audit
+	@docker compose run --rm -e NPM_TOKEN=$(NPM_TOKEN) -e GITHUB_TOKEN=$(GITHUB_TOKEN) -v $(NPMRC):/root/.npmrc app npm install --no-fund --no-audit
 
 test: ## run all npm tests
 	@docker compose --profile test up
