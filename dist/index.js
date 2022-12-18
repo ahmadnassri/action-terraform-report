@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import require$$0 from 'os';
 import fs_1 from 'fs';
-import require$$0$1 from 'path';
 import crypto from 'crypto';
+import require$$0$1 from 'path';
 import http from 'http';
 import https from 'https';
 import 'net';
@@ -160,50 +160,6 @@ function escapeProperty(s) {
         .replace(/:/g, '%3A')
         .replace(/,/g, '%2C');
 }
-
-});
-
-var fileCommand = createCommonjsModule(function (module, exports) {
-// For internal use, subject to change.
-var __createBinding = (commonjsGlobal && commonjsGlobal.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (commonjsGlobal && commonjsGlobal.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (commonjsGlobal && commonjsGlobal.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.issueCommand = void 0;
-// We use any as a valid input type
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const fs = __importStar(fs_1);
-const os = __importStar(require$$0);
-
-function issueCommand(command, message) {
-    const filePath = process.env[`GITHUB_${command}`];
-    if (!filePath) {
-        throw new Error(`Unable to find environment variable for file command ${command}`);
-    }
-    if (!fs.existsSync(filePath)) {
-        throw new Error(`Missing file at path: ${filePath}`);
-    }
-    fs.appendFileSync(filePath, `${utils$3.toCommandValue(message)}${os.EOL}`, {
-        encoding: 'utf8'
-    });
-}
-exports.issueCommand = issueCommand;
 
 });
 
@@ -506,6 +462,66 @@ var esmNode = {
 	stringify: stringify$5,
 	parse: parse$5
 };
+
+var fileCommand = createCommonjsModule(function (module, exports) {
+// For internal use, subject to change.
+var __createBinding = (commonjsGlobal && commonjsGlobal.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (commonjsGlobal && commonjsGlobal.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (commonjsGlobal && commonjsGlobal.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.prepareKeyValueMessage = exports.issueFileCommand = void 0;
+// We use any as a valid input type
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const fs = __importStar(fs_1);
+const os = __importStar(require$$0);
+
+
+function issueFileCommand(command, message) {
+    const filePath = process.env[`GITHUB_${command}`];
+    if (!filePath) {
+        throw new Error(`Unable to find environment variable for file command ${command}`);
+    }
+    if (!fs.existsSync(filePath)) {
+        throw new Error(`Missing file at path: ${filePath}`);
+    }
+    fs.appendFileSync(filePath, `${utils$3.toCommandValue(message)}${os.EOL}`, {
+        encoding: 'utf8'
+    });
+}
+exports.issueFileCommand = issueFileCommand;
+function prepareKeyValueMessage(key, value) {
+    const delimiter = `ghadelimiter_${esmNode.v4()}`;
+    const convertedValue = utils$3.toCommandValue(value);
+    // These should realistically never happen, but just in case someone finds a
+    // way to exploit uuid generation let's not allow keys or values that contain
+    // the delimiter.
+    if (key.includes(delimiter)) {
+        throw new Error(`Unexpected input: name should not contain the delimiter "${delimiter}"`);
+    }
+    if (convertedValue.includes(delimiter)) {
+        throw new Error(`Unexpected input: value should not contain the delimiter "${delimiter}"`);
+    }
+    return `${key}<<${delimiter}${os.EOL}${convertedValue}${os.EOL}${delimiter}`;
+}
+exports.prepareKeyValueMessage = prepareKeyValueMessage;
+
+});
 
 var proxy = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -1987,7 +2003,6 @@ exports.getIDToken = exports.getState = exports.saveState = exports.group = expo
 const os = __importStar(require$$0);
 const path = __importStar(require$$0$1);
 
-
 /**
  * The code to exit an action
  */
@@ -2016,20 +2031,9 @@ function exportVariable(name, val) {
     process.env[name] = convertedVal;
     const filePath = process.env['GITHUB_ENV'] || '';
     if (filePath) {
-        const delimiter = `ghadelimiter_${esmNode.v4()}`;
-        // These should realistically never happen, but just in case someone finds a way to exploit uuid generation let's not allow keys or values that contain the delimiter.
-        if (name.includes(delimiter)) {
-            throw new Error(`Unexpected input: name should not contain the delimiter "${delimiter}"`);
-        }
-        if (convertedVal.includes(delimiter)) {
-            throw new Error(`Unexpected input: value should not contain the delimiter "${delimiter}"`);
-        }
-        const commandValue = `${name}<<${delimiter}${os.EOL}${convertedVal}${os.EOL}${delimiter}`;
-        fileCommand.issueCommand('ENV', commandValue);
+        return fileCommand.issueFileCommand('ENV', fileCommand.prepareKeyValueMessage(name, val));
     }
-    else {
-        command.issueCommand('set-env', { name }, convertedVal);
-    }
+    command.issueCommand('set-env', { name }, convertedVal);
 }
 exports.exportVariable = exportVariable;
 /**
@@ -2047,7 +2051,7 @@ exports.setSecret = setSecret;
 function addPath(inputPath) {
     const filePath = process.env['GITHUB_PATH'] || '';
     if (filePath) {
-        fileCommand.issueCommand('PATH', inputPath);
+        fileCommand.issueFileCommand('PATH', inputPath);
     }
     else {
         command.issueCommand('add-path', {}, inputPath);
@@ -2087,7 +2091,10 @@ function getMultilineInput(name, options) {
     const inputs = getInput(name, options)
         .split('\n')
         .filter(x => x !== '');
-    return inputs;
+    if (options && options.trimWhitespace === false) {
+        return inputs;
+    }
+    return inputs.map(input => input.trim());
 }
 exports.getMultilineInput = getMultilineInput;
 /**
@@ -2120,8 +2127,12 @@ exports.getBooleanInput = getBooleanInput;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function setOutput(name, value) {
+    const filePath = process.env['GITHUB_OUTPUT'] || '';
+    if (filePath) {
+        return fileCommand.issueFileCommand('OUTPUT', fileCommand.prepareKeyValueMessage(name, value));
+    }
     process.stdout.write(os.EOL);
-    command.issueCommand('set-output', { name }, value);
+    command.issueCommand('set-output', { name }, utils$3.toCommandValue(value));
 }
 exports.setOutput = setOutput;
 /**
@@ -2250,7 +2261,11 @@ exports.group = group;
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function saveState(name, value) {
-    command.issueCommand('save-state', { name }, value);
+    const filePath = process.env['GITHUB_STATE'] || '';
+    if (filePath) {
+        return fileCommand.issueFileCommand('STATE', fileCommand.prepareKeyValueMessage(name, value));
+    }
+    command.issueCommand('save-state', { name }, utils$3.toCommandValue(value));
 }
 exports.saveState = saveState;
 /**
@@ -87206,7 +87221,8 @@ function context () {
     showPlan: core$3.getInput('show-plan'),
     textPath: core$3.getInput('terraform-text'),
     jsonPath: core$3.getInput('terraform-json'),
-    removeStaleReports: core$3.getInput('remove-stale-reports')
+    removeStaleReports: core$3.getInput('remove-stale-reports'),
+    customHeader: core$3.getInput('custom-header')
   }; // extract relevant variables
 
   const {
@@ -96887,9 +96903,7 @@ var properties = {
 				change: {
 					type: "object",
 					required: [
-						"actions",
-						"before",
-						"after"
+						"actions"
 					]
 				}
 			}
@@ -104691,8 +104705,8 @@ var terraformUnidiff = function (plan) {
     if (resource.change.actions.includes('no-op')) continue
 
     // convert to yaml for better visibility
-    const before = dist.stringify(resource.change.before);
-    const after = dist.stringify(resource.change.after);
+    const before = dist.stringify(resource.change.before || '');
+    const after = dist.stringify(resource.change.after || '');
 
     const patch = createPatch(resource.address, before, after);
 
@@ -104705,12 +104719,24 @@ var terraformUnidiff = function (plan) {
     delete: 0
   };
 
-  const summary = plan.resource_changes.reduce((counter, { change: { actions: [action] } }) => {
-    /* istanbul ignore next */
-    if (action === 'create') counter.create += 1;
-    if (action === 'update') counter.update += 1;
-    /* istanbul ignore next */
-    if (action === 'delete') counter.delete += 1;
+  const summary = plan.resource_changes.reduce((counter, { change: { actions } }) => {
+    const action = actions.join('-');
+
+    switch (action) {
+      case 'create':
+      case 'delete-create':
+        counter.create += 1;
+        break
+
+      case 'update':
+        counter.update += 1;
+        break
+
+      case 'delete':
+      case 'create-delete':
+        counter.delete += 1;
+        break
+    }
 
     return counter
   }, counter);
@@ -104735,14 +104761,16 @@ function report (data) {
       summary,
       patches
     },
-    textContent
+    textContent,
+    customHeader
   } = data;
   const {
     runId,
     repo,
     sha
   } = github$1.context;
-  data.header = ':robot: Terraform Report';
+  const headerText = customHeader || ':robot: *Terraform Report*';
+  data.header = headerText;
   data.footer = `This comment was generated by [Terraform Pull Request Report Generator](https://github.com/ahmadnassri/action-terraform-report) - action run [\`#${runId}\`](https://github.com/${repo.owner}/${repo.repo}/actions/runs/${runId}) - commit ${sha}`;
   data.body = `
 ### ${data.header}
@@ -104777,33 +104805,16 @@ ${diff}
 `;
 }
 
-function _extends() {
-  _extends = Object.assign ? Object.assign.bind() : function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-  return _extends.apply(this, arguments);
-}
-
 async function post ({
   token,
   body
 }) {
   const octokit = github$1.getOctokit(token); // update PR
 
-  await octokit.rest.issues.createComment(_extends({}, github$1.context.repo, {
+  await octokit.rest.issues.createComment({ ...github$1.context.repo,
     issue_number: github$1.context.payload.pull_request.number,
     body
-  }));
+  });
 }
 
 /* eslint-disable camelcase */
@@ -104821,9 +104832,9 @@ async function stale (data) {
 
   const {
     data: results
-  } = await octokit.rest.issues.listComments(_extends({}, repo, {
+  } = await octokit.rest.issues.listComments({ ...repo,
     issue_number
-  })); // get action comments
+  }); // get action comments
 
   const comments = results.filter(c => c.body.includes(data.header) && !c.body.includes(data.footer)); // remove existing comments
 
@@ -104831,10 +104842,10 @@ async function stale (data) {
     id: comment_id
   } of comments) {
     try {
-      await octokit.rest.issues.deleteComment(_extends({}, repo, {
+      await octokit.rest.issues.deleteComment({ ...repo,
         issue_number,
         comment_id
-      }));
+      });
     } catch (error) {
       core$3.warning(`Could not delete comment: ${comment_id}`);
     }
@@ -104849,13 +104860,14 @@ function errorHandler(err) {
 
 
 process.on('unhandledRejection', errorHandler);
-process.on('uncaughtException', errorHandler);
-const data = context();
-await parse(data);
-report(data);
+process.on('uncaughtException', errorHandler); // grab action context
 
-if (data.removeStaleReports === 'true') {
-  await stale(data);
-}
+const data = context(); // parse plan content
+
+await parse(data); // generate report markdown
+
+report(data); // remove stale comment
+
+if (data.removeStaleReports === 'true') await stale(data); // post new comment
 
 post(data);
