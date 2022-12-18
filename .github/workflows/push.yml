@@ -45,7 +45,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3.0.2
 
-      - uses: oxsecurity/megalinter/flavors/javascript@v6
+      - uses: oxsecurity/megalinter/flavors/javascript@v6.15.0
         env:
           GITHUB_TOKEN: ${{ github.token }}
           MEGALINTER_CONFIG: .github/linters/.mega-linter.yml
@@ -161,7 +161,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            const { object: { sha } } = github.rest.git.getRef({ ...context.repo, ref: 'tags/${{ matrix.release }}' })
+            const { data: { object: { sha } } } = await github.rest.git.getRef({ ...context.repo, ref: 'tags/${{ matrix.release }}' })
             await github.rest.git.deleteRef({ ...context.repo, ref: 'tags/${{ matrix.alias }}' }).catch(() => {})
             await github.rest.git.createRef({ ...context.repo, ref: 'refs/tags/${{ matrix.alias }}', sha })
 
