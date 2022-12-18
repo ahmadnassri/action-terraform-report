@@ -126,6 +126,16 @@ jobs:
         with:
           submodules: true
 
+      - uses: actions/setup-node@v3.4.1
+        with:
+          registry-url: https://npm.pkg.github.com
+          node-version: latest
+          cache: npm
+
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - id: release
         uses: ahmadnassri/action-semantic-release@v2
         with:
@@ -143,7 +153,7 @@ jobs:
     strategy:
       matrix:
         release: [ "v${{ needs.release.outputs.version }}" ]
-        alias: 
+        alias:
           - "v${{ needs.release.outputs.version-major }}"
           - "v${{ needs.release.outputs.version-major }}.${{ needs.release.outputs.version-minor }}"
 
