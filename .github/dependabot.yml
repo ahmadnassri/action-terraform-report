@@ -39,7 +39,7 @@ updates:
       interval: daily
       time: "10:00"
       timezone: America/Toronto
-      
+
   - package-ecosystem: npm
     open-pull-requests-limit: 10
     directory: /action
