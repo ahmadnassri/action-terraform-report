@@ -87137,7 +87137,7 @@ var __importStar = (commonjsGlobal && commonjsGlobal.__importStar) || function (
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOctokitOptions = exports.GitHub = exports.context = void 0;
+exports.getOctokitOptions = exports.GitHub = exports.defaults = exports.context = void 0;
 const Context = __importStar(context$1);
 const Utils = __importStar(utils$2);
 // octokit + plugins
@@ -87146,13 +87146,13 @@ const Utils = __importStar(utils$2);
 
 exports.context = new Context.Context();
 const baseUrl = Utils.getApiBaseUrl();
-const defaults = {
+exports.defaults = {
     baseUrl,
     request: {
         agent: Utils.getProxyAgent(baseUrl)
     }
 };
-exports.GitHub = distWeb$2.Octokit.plugin(distWeb$1.restEndpointMethods, distWeb.paginateRest).defaults(defaults);
+exports.GitHub = distWeb$2.Octokit.plugin(distWeb$1.restEndpointMethods, distWeb.paginateRest).defaults(exports.defaults);
 /**
  * Convience function to correctly format Octokit Options to pass into the constructor.
  *
@@ -87203,8 +87203,9 @@ exports.context = new Context.Context();
  * @param     token    the repo PAT or GITHUB_TOKEN
  * @param     options  other options to set
  */
-function getOctokit(token, options) {
-    return new utils.GitHub(utils.getOctokitOptions(token, options));
+function getOctokit(token, options, ...additionalPlugins) {
+    const GitHubWithPlugins = utils.GitHub.plugin(...additionalPlugins);
+    return new GitHubWithPlugins(utils.getOctokitOptions(token, options));
 }
 exports.getOctokit = getOctokit;
 
