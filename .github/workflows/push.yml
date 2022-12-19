@@ -20,7 +20,7 @@ jobs:
       repository_default_branch: ${{ steps.metadata.outputs.repository_default_branch }}
 
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.2.0
 
       - id: metadata
         uses: ahmadnassri/action-metadata@v2.1.2
@@ -31,9 +31,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.2.0
 
-      - uses: ahmadnassri/action-commit-lint@v2.0.3
+      - uses: ahmadnassri/action-commit-lint@v2.0.4
         with:
           config: .github/linters/.commit-lint.yml
 
@@ -43,9 +43,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.2.0
 
-      - uses: oxsecurity/megalinter/flavors/javascript@v6
+      - uses: oxsecurity/megalinter/flavors/javascript@v6.15.0
         env:
           GITHUB_TOKEN: ${{ github.token }}
           MEGALINTER_CONFIG: .github/linters/.mega-linter.yml
@@ -66,9 +66,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.2.0
 
-      - uses: actions/setup-node@v3.4.1
+      - uses: actions/setup-node@v3.5.1
         with:
           node-version: latest
 
@@ -83,11 +83,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.2.0
         with:
           submodules: true
 
-      - uses: actions/setup-node@v3.4.1
+      - uses: actions/setup-node@v3.5.1
         with:
           registry-url: https://npm.pkg.github.com
           node-version: latest
@@ -122,12 +122,22 @@ jobs:
       version-minor: ${{ steps.release.outputs.release-version-minor }}
 
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.2.0
         with:
           submodules: true
 
+      - uses: actions/setup-node@v3.5.1
+        with:
+          registry-url: https://npm.pkg.github.com
+          node-version: latest
+          cache: npm
+
+      - run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - id: release
-        uses: ahmadnassri/action-semantic-release@v2
+        uses: ahmadnassri/action-semantic-release@v2.1.11
         with:
           config: ${{ github.workspace }}/.semantic.json
         env:
@@ -143,7 +153,7 @@ jobs:
     strategy:
       matrix:
         release: [ "v${{ needs.release.outputs.version }}" ]
-        alias: 
+        alias:
           - "v${{ needs.release.outputs.version-major }}"
           - "v${{ needs.release.outputs.version-major }}.${{ needs.release.outputs.version-minor }}"
 
@@ -151,7 +161,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            const { object: { sha } } = github.rest.git.getRef({ ...context.repo, ref: 'tags/${{ matrix.release }}' })
+            const { data: { object: { sha } } } = await github.rest.git.getRef({ ...context.repo, ref: 'tags/${{ matrix.release }}' })
             await github.rest.git.deleteRef({ ...context.repo, ref: 'tags/${{ matrix.alias }}' }).catch(() => {})
             await github.rest.git.createRef({ ...context.repo, ref: 'refs/tags/${{ matrix.alias }}', sha })
 
@@ -172,8 +182,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3.0.2
+      - uses: actions/checkout@v3.2.0
 
-      - uses: ahmadnassri/action-template-repository-sync@v2
+      - uses: ahmadnassri/action-template-repository-sync@v2.3.0
         with:
           github-token: ${{ secrets.GH_TOKEN }}

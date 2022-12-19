@@ -1,33 +1,9 @@
-# ----------------------------------------------- #
-# Note: this file originates in template-template #
-# ----------------------------------------------- #
+# -------------------------------------------------- #
+# Note: this file originates in template-action-node #
+# -------------------------------------------------- #
 
 version: 2
 updates:
-  - package-ecosystem: gitsubmodule
-    open-pull-requests-limit: 10
-    directory: /
-    commit-message:
-      prefix: build
-      prefix-development: chore
-      include: scope
-    schedule:
-      interval: daily
-      time: "10:00"
-      timezone: America/Toronto
-
-  - package-ecosystem: github-actions
-    open-pull-requests-limit: 10
-    directory: /
-    commit-message:
-      prefix: chore
-      prefix-development: chore
-      include: scope
-    schedule:
-      interval: daily
-      time: "10:00"
-      timezone: America/Toronto
-
   - package-ecosystem: npm
     open-pull-requests-limit: 10
     directory: /
@@ -39,51 +15,4 @@ updates:
       interval: daily
       time: "10:00"
       timezone: America/Toronto
-      
-  - package-ecosystem: npm
-    open-pull-requests-limit: 10
-    directory: /action
-    commit-message:
-      prefix: build
-      prefix-development: chore
-      include: scope
-    schedule:
-      interval: daily
-      time: "10:00"
-      timezone: America/Toronto
 
-  - package-ecosystem: bundler
-    open-pull-requests-limit: 10
-    directory: /
-    commit-message:
-      prefix: build
-      prefix-development: chore
-      include: scope
-    schedule:
-      interval: daily
-      time: "10:00"
-      timezone: America/Toronto
-
-  - package-ecosystem: terraform
-    open-pull-requests-limit: 10
-    directory: /
-    commit-message:
-      prefix: build
-      prefix-development: chore
-      include: scope
-    schedule:
-      interval: daily
-      time: "10:00"
-      timezone: America/Toronto
-
-  - package-ecosystem: docker
-    open-pull-requests-limit: 10
-    directory: /
-    commit-message:
-      prefix: build
-      prefix-development: chore
-      include: scope
-    schedule:
-      interval: daily
-      time: "10:00"
-      timezone: America/Toronto
