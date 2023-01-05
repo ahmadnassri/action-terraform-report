@@ -68,7 +68,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3.2.0
 
-      - uses: actions/setup-node@v3.5.1
+      - uses: actions/setup-node@v3.6.0
         with:
           node-version: latest
 
@@ -87,7 +87,7 @@ jobs:
         with:
           submodules: true
 
-      - uses: actions/setup-node@v3.5.1
+      - uses: actions/setup-node@v3.6.0
         with:
           registry-url: https://npm.pkg.github.com
           node-version: latest
@@ -126,7 +126,7 @@ jobs:
         with:
           submodules: true
 
-      - uses: actions/setup-node@v3.5.1
+      - uses: actions/setup-node@v3.6.0
         with:
           registry-url: https://npm.pkg.github.com
           node-version: latest
