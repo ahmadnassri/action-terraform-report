@@ -137,7 +137,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - id: release
-        uses: ahmadnassri/action-semantic-release@v2.2.2
+        uses: ahmadnassri/action-semantic-release@v2.2.3
         with:
           config: ${{ github.workspace }}/.semantic.json
         env:
