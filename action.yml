@@ -21,22 +21,27 @@ inputs:
 
   show-diff:
     description: include the diff view in the final output?
-    default: "false"
+    default: 'false'
     required: false
 
   show-plan:
     description: include the terraform plan view in the final output?
-    default: "true"
+    default: 'true'
     required: false
 
   remove-stale-reports:
     description: remove report comments for old commits?
-    default: "false"
+    default: 'false'
     required: false
 
   custom-header:
     description: The header text for the github comment
-    default: ":robot: Terraform Report"
+    default: ':robot: Terraform Report'
+    required: false
+
+  pull_request_number:
+    description: The pull requests number
+    default: ${{ github.event.pull_request.number }}
     required: false
 
 runs:
