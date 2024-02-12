@@ -39,7 +39,17 @@ inputs:
     default: ':robot: Terraform Report'
     required: false
 
-  pull_request_number:
+  owner:
+    description: The owner of the repository
+    default: ${{ github.repository_owner }}
+    required: false
+
+  repo:
+    description: The repository name
+    default: ${{ github.event.repository.name }}
+    required: false
+
+  pull-request-number:
     description: The pull requests number
     default: ${{ github.event.pull_request.number }}
     required: false
