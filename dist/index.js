@@ -128102,6 +128102,18 @@ ${diff}
 ---
 > ${data.footer}
 `;
+  const commentMaximumLength = 65536;
+  if (data.body.length > commentMaximumLength) {
+    data.body = `
+### ${data.header}
+---
+##### Plan: \`${summary.create}\` to add, \`${summary.update}\` to change, \`${summary.delete}\` to destroy
+##### Warning: The generated comment is too long, check [the output](https://github.com/${repo.owner}/${repo.repo}/actions/runs/${runId}) for the full detail.`;
+    data.body += `
+---
+> ${data.footer}
+`;
+  }
 }
 
 async function post ({
