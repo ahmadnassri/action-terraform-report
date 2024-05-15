@@ -29,9 +29,9 @@
   "type": "module",
   "scripts": {
     "build": "microbundle --no-pkg-main --no-sourcemap --external none --target node --format esm --entry index.js --output dist/index.js",
-    "test": "tap test --no-coverage",
+    "test": "tap test --allow-empty-coverage",
     "test:watch": "tap test --watch",
-    "test:ci": "tap test --100",
+    "test:ci": "tap test --show-full-coverage",
     "test:report": "opener coverage/lcov-report/index.html"
   },
   "dependencies": {
