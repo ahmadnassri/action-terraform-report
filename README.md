@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4.1.7
       - uses: hashicorp/setup-terraform@v1
         with:
           terraform_wrapper: false
