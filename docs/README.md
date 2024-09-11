@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: hashicorp/setup-terraform@v1
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
         with:
           terraform_wrapper: false
 
@@ -25,7 +25,7 @@ jobs:
       # generate json output
       - run: terraform show -json terraform.plan > terraform.json
 
-      - uses: ahmadnassri/action-terraform-report@v3
+      - uses: ahmadnassri/action-terraform-report@v4
         with:
           # tell the action the plan outputs
           terraform-text: ${{ github.workspace }}/terraform.text
