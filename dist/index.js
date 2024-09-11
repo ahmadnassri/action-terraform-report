@@ -39048,8 +39048,7 @@ Object.defineProperty(exports, "MissingRefError", { enumerable: true, get: funct
 var type = "object";
 var required = [
 	"format_version",
-	"terraform_version",
-	"resource_changes"
+	"terraform_version"
 ];
 var properties = {
 	format_version: {
@@ -47047,7 +47046,7 @@ var terraformUnidiff = function (plan) {
 
   const patches = [];
 
-  for (const resource of plan.resource_changes) {
+  for (const resource of plan?.resource_changes || []) {
     // skip early
     if (resource.change.actions.includes('no-op')) continue
 
@@ -47067,7 +47066,7 @@ var terraformUnidiff = function (plan) {
   };
 
   // const summary = [...plan.resource_changes, ...plan.resource_drift].reduce((counter, { change: { actions } }) => {
-  const summary = plan.resource_changes.reduce((counter, { change: { actions } }) => {
+  const summary = (plan?.resource_changes || []).reduce((counter, { change: { actions } }) => {
     for (const action of actions) {
       switch (action) {
         case 'create':
