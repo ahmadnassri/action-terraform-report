@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 import require$$0 from 'os';
+import require$$0$1 from 'crypto';
 import fs_1 from 'fs';
-import require$$0$5 from 'path';
+import require$$0$6 from 'path';
 import http$1 from 'http';
 import https$1 from 'https';
 import net from 'net';
@@ -10,17 +11,16 @@ import EE from 'events';
 import assert from 'assert';
 import nodeUtil from 'util';
 import stream$2 from 'stream';
-import require$$0$1 from 'buffer';
+import require$$0$2 from 'buffer';
 import require$$4 from 'querystring';
 import require$$11 from 'stream/web';
 import diagnosticsChannel from 'diagnostics_channel';
-import require$$0$3 from 'node:stream';
+import require$$0$4 from 'node:stream';
 import require$$1 from 'node:util';
-import require$$0$2 from 'node:events';
-import require$$0$4 from 'worker_threads';
+import require$$0$3 from 'node:events';
+import require$$0$5 from 'worker_threads';
 import require$$2 from 'perf_hooks';
 import require$$4$1 from 'util/types';
-import require$$5 from 'crypto';
 import require$$3 from 'http2';
 import require$$2$1 from 'async_hooks';
 import require$$1$1 from 'console';
@@ -211,6 +211,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.prepareKeyValueMessage = exports.issueFileCommand = void 0;
 // We use any as a valid input type
 /* eslint-disable @typescript-eslint/no-explicit-any */
+const crypto = __importStar(require$$0$1);
 const fs = __importStar(fs_1);
 const os = __importStar(require$$0);
 
@@ -1008,7 +1009,7 @@ const { IncomingMessage } = http$1;
 
 
 const { InvalidArgumentError: InvalidArgumentError$k } = errors$2;
-const { Blob: Blob$5 } = require$$0$1;
+const { Blob: Blob$5 } = require$$0$2;
 
 const { stringify: stringify$7 } = require$$4;
 const { headerNameLowerCasedRecord } = constants$4;
@@ -1645,7 +1646,7 @@ var timers = {
  * Based heavily on the Streaming Boyer-Moore-Horspool C++ implementation
  * by Hongli Lai at: https://github.com/FooBarWidget/boyer-moore-horspool
  */
-const EventEmitter$1 = require$$0$2.EventEmitter;
+const EventEmitter$1 = require$$0$3.EventEmitter;
 const inherits$5 = require$$1.inherits;
 
 function SBMH (needle) {
@@ -1847,7 +1848,7 @@ SBMH.prototype._sbmh_memcmp = function (data, pos, len) {
 var sbmh = SBMH;
 
 const inherits$4 = require$$1.inherits;
-const ReadableStream$4 = require$$0$3.Readable;
+const ReadableStream$4 = require$$0$4.Readable;
 
 function PartStream (opts) {
   ReadableStream$4.call(this, opts);
@@ -1873,7 +1874,7 @@ var getLimit = function getLimit (limits, name, defaultLimit) {
   return limits[name]
 };
 
-const EventEmitter = require$$0$2.EventEmitter;
+const EventEmitter = require$$0$3.EventEmitter;
 const inherits$3 = require$$1.inherits;
 
 
@@ -1972,7 +1973,7 @@ HeaderParser.prototype._parseHeader = function () {
 
 var HeaderParser_1 = HeaderParser;
 
-const WritableStream$1 = require$$0$3.Writable;
+const WritableStream$1 = require$$0$4.Writable;
 const inherits$2 = require$$1.inherits;
 
 
@@ -2513,7 +2514,7 @@ var basename = function basename (path) {
 //  * support limits.fieldNameSize
 //     -- this will require modifications to utils.parseParams
 
-const { Readable: Readable$3 } = require$$0$3;
+const { Readable: Readable$3 } = require$$0$4;
 const { inherits: inherits$1 } = require$$1;
 
 
@@ -3049,7 +3050,7 @@ UrlEncoded.prototype.end = function () {
 
 var urlencoded = UrlEncoded;
 
-const WritableStream = require$$0$3.Writable;
+const WritableStream = require$$0$4.Writable;
 const { inherits } = require$$1;
 
 
@@ -3136,7 +3137,7 @@ main.default = _default$C;
 main.Busboy = Busboy_1;
 main.Dicer = Dicer_1;
 
-const { MessageChannel, receiveMessageOnPort } = require$$0$4;
+const { MessageChannel, receiveMessageOnPort } = require$$0$5;
 
 const corsSafeListedMethods = ['GET', 'HEAD', 'POST'];
 const corsSafeListedMethodsSet$1 = new Set(corsSafeListedMethods);
@@ -3336,12 +3337,12 @@ let supportedHashes = [];
 
 // https://nodejs.org/api/crypto.html#determining-if-crypto-support-is-unavailable
 /** @type {import('crypto')|undefined} */
-let crypto$3;
+let crypto$2;
 
 try {
-  crypto$3 = require$$5;
+  crypto$2 = require$$0$1;
   const possibleRelevantHashes = ['sha256', 'sha384', 'sha512'];
-  supportedHashes = crypto$3.getHashes().filter((hash) => possibleRelevantHashes.includes(hash));
+  supportedHashes = crypto$2.getHashes().filter((hash) => possibleRelevantHashes.includes(hash));
 /* c8 ignore next 3 */
 } catch {
 }
@@ -3858,7 +3859,7 @@ function bytesMatch$1 (bytes, metadataList) {
   // a request's integrity, so allow it by default (the spec will
   // allow requests if an invalid hash is given, as precedence).
   /* istanbul ignore if: only if node is built with --without-ssl */
-  if (crypto$3 === undefined) {
+  if (crypto$2 === undefined) {
     return true
   }
 
@@ -3895,7 +3896,7 @@ function bytesMatch$1 (bytes, metadataList) {
     // "be liberal with padding". This is annoying, and it's not even in the spec.
 
     // 3. Let actualValue be the result of applying algorithm to bytes.
-    let actualValue = crypto$3.createHash(algorithm).update(bytes).digest('base64');
+    let actualValue = crypto$2.createHash(algorithm).update(bytes).digest('base64');
 
     if (actualValue[actualValue.length - 1] === '=') {
       if (actualValue[actualValue.length - 2] === '=') {
@@ -5121,7 +5122,7 @@ var webidl_1 = {
   webidl: webidl$e
 };
 
-const { atob: atob$1 } = require$$0$1;
+const { atob: atob$1 } = require$$0$2;
 const { isomorphicDecode } = util$6;
 
 const encoder$1 = new TextEncoder();
@@ -5748,7 +5749,7 @@ var dataURL = {
   serializeAMimeType: serializeAMimeType$4
 };
 
-const { Blob: Blob$4, File: NativeFile$2 } = require$$0$1;
+const { Blob: Blob$4, File: NativeFile$2 } = require$$0$2;
 const { types: types$4 } = nodeUtil;
 const { kState: kState$9 } = symbols$3;
 const { isBlobLike: isBlobLike$5 } = util$6;
@@ -6095,7 +6096,7 @@ const { isBlobLike: isBlobLike$4, toUSVString: toUSVString$2, makeIterator: make
 const { kState: kState$8 } = symbols$3;
 const { File: UndiciFile$1, FileLike, isFileLike } = file;
 const { webidl: webidl$c } = webidl_1;
-const { Blob: Blob$3, File: NativeFile$1 } = require$$0$1;
+const { Blob: Blob$3, File: NativeFile$1 } = require$$0$2;
 
 /** @type {globalThis['File']} */
 const File$1 = NativeFile$1 ?? UndiciFile$1;
@@ -6367,7 +6368,7 @@ const { FormData: FormData$1 } = formdata;
 const { kState: kState$7 } = symbols$3;
 const { webidl: webidl$b } = webidl_1;
 const { DOMException: DOMException$5, structuredClone } = constants$3;
-const { Blob: Blob$2, File: NativeFile } = require$$0$1;
+const { Blob: Blob$2, File: NativeFile } = require$$0$2;
 const { kBodyUsed: kBodyUsed$1 } = symbols$4;
 
 const { isErrored: isErrored$1 } = util$7;
@@ -11738,7 +11739,7 @@ function consumeEnd (consume) {
       resolve(dst.buffer);
     } else if (type === 'blob') {
       if (!Blob$1) {
-        Blob$1 = require$$0$1.Blob;
+        Blob$1 = require$$0$2.Blob;
       }
       resolve(new Blob$1(body, { type: stream[kContentType] }));
     }
@@ -17153,7 +17154,7 @@ function schemeFetch (fetchParams) {
     }
     case 'blob:': {
       if (!resolveObjectURL) {
-        resolveObjectURL = require$$0$1.resolveObjectURL;
+        resolveObjectURL = require$$0$2.resolveObjectURL;
       }
 
       // 1. Let blobURLEntry be request’s current URL’s blob URL entry.
@@ -18809,7 +18810,7 @@ const { DOMException: DOMException$2 } = constants$3;
 const { serializeAMimeType, parseMIMEType } = dataURL;
 const { types: types$2 } = nodeUtil;
 const { StringDecoder } = string_decoder_1;
-const { btoa: btoa$1 } = require$$0$1;
+const { btoa: btoa$1 } = require$$0$2;
 
 /** @type {PropertyDescriptor} */
 const staticPropertyDescriptors$3 = {
@@ -21423,7 +21424,7 @@ var symbols = {
 
 const { webidl: webidl$1 } = webidl_1;
 const { kEnumerableProperty: kEnumerableProperty$1 } = util$7;
-const { MessagePort } = require$$0$4;
+const { MessagePort } = require$$0$5;
 
 /**
  * @see https://html.spec.whatwg.org/multipage/comms.html#messageevent
@@ -21943,9 +21944,9 @@ channels$1.close = diagnosticsChannel.channel('undici:websocket:close');
 channels$1.socketError = diagnosticsChannel.channel('undici:websocket:socket_error');
 
 /** @type {import('crypto')} */
-let crypto$2;
+let crypto$1;
 try {
-  crypto$2 = require$$5;
+  crypto$1 = require$$0$1;
 } catch {
 
 }
@@ -21994,7 +21995,7 @@ function establishWebSocketConnection$1 (url, protocols, ws, onEstablish, option
   // 5. Let keyValue be a nonce consisting of a randomly selected
   //    16-byte value that has been forgiving-base64-encoded and
   //    isomorphic encoded.
-  const keyValue = crypto$2.randomBytes(16).toString('base64');
+  const keyValue = crypto$1.randomBytes(16).toString('base64');
 
   // 6. Append (`Sec-WebSocket-Key`, keyValue) to request’s
   //    header list.
@@ -22076,7 +22077,7 @@ function establishWebSocketConnection$1 (url, protocols, ws, onEstablish, option
       //    trailing whitespace, the client MUST _Fail the WebSocket
       //    Connection_.
       const secWSAccept = response.headersList.get('Sec-WebSocket-Accept');
-      const digest = crypto$2.createHash('sha1').update(keyValue + uid).digest('base64');
+      const digest = crypto$1.createHash('sha1').update(keyValue + uid).digest('base64');
       if (secWSAccept !== digest) {
         failWebsocketConnection$2(ws, 'Incorrect hash received in Sec-WebSocket-Accept header.');
         return
@@ -22214,9 +22215,9 @@ var connection = {
 const { maxUnsigned16Bit } = constants;
 
 /** @type {import('crypto')} */
-let crypto$1;
+let crypto;
 try {
-  crypto$1 = require$$5;
+  crypto = require$$0$1;
 } catch {
 
 }
@@ -22227,7 +22228,7 @@ class WebsocketFrameSend$2 {
    */
   constructor (data) {
     this.frameData = data;
-    this.maskKey = crypto$1.randomBytes(4);
+    this.maskKey = crypto.randomBytes(4);
   }
 
   createFrame (opcode) {
@@ -24561,7 +24562,7 @@ var __importStar = (commonjsGlobal && commonjsGlobal.__importStar) || function (
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toPlatformPath = exports.toWin32Path = exports.toPosixPath = void 0;
-const path = __importStar(require$$0$5);
+const path = __importStar(require$$0$6);
 /**
  * toPosixPath converts the given path to the posix form. On Windows, \\ will be
  * replaced with /.
@@ -24632,7 +24633,7 @@ var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCmdPath = exports.tryGetExecutablePath = exports.isRooted = exports.isDirectory = exports.exists = exports.READONLY = exports.UV_FS_O_EXLOCK = exports.IS_WINDOWS = exports.unlink = exports.symlink = exports.stat = exports.rmdir = exports.rm = exports.rename = exports.readlink = exports.readdir = exports.open = exports.mkdir = exports.lstat = exports.copyFile = exports.chmod = void 0;
 const fs = __importStar(fs_1);
-const path = __importStar(require$$0$5);
+const path = __importStar(require$$0$6);
 _a = fs.promises
 // export const {open} = 'fs'
 , exports.chmod = _a.chmod, exports.copyFile = _a.copyFile, exports.lstat = _a.lstat, exports.mkdir = _a.mkdir, exports.open = _a.open, exports.readdir = _a.readdir, exports.readlink = _a.readlink, exports.rename = _a.rename, exports.rm = _a.rm, exports.rmdir = _a.rmdir, exports.stat = _a.stat, exports.symlink = _a.symlink, exports.unlink = _a.unlink;
@@ -24816,7 +24817,7 @@ var __awaiter = (commonjsGlobal && commonjsGlobal.__awaiter) || function (thisAr
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findInPath = exports.which = exports.mkdirP = exports.rmRF = exports.mv = exports.cp = void 0;
 
-const path = __importStar(require$$0$5);
+const path = __importStar(require$$0$6);
 const ioUtil$1 = __importStar(ioUtil);
 /**
  * Copies a file or folder.
@@ -25119,7 +25120,7 @@ exports.argStringToArray = exports.ToolRunner = void 0;
 const os = __importStar(require$$0);
 const events = __importStar(EE);
 const child = __importStar(require$$2$2);
-const path = __importStar(require$$0$5);
+const path = __importStar(require$$0$6);
 const io$1 = __importStar(io);
 const ioUtil$1 = __importStar(ioUtil);
 
@@ -25945,7 +25946,7 @@ exports.platform = exports.toPlatformPath = exports.toWin32Path = exports.toPosi
 
 
 const os = __importStar(require$$0);
-const path = __importStar(require$$0$5);
+const path = __importStar(require$$0$6);
 
 /**
  * The code to exit an action
