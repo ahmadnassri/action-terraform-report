@@ -37,7 +37,7 @@
   "dependencies": {
     "@actions/core": "^1.11.1",
     "@actions/github": "^6.0.0",
-    "@ahmadnassri/terraform-unidiff": "^4.0.3"
+    "@ahmadnassri/terraform-unidiff": "^4.0.4"
   },
   "devDependencies": {
     "microbundle": "^0.15.1",
