@@ -21,6 +21,7 @@ import require$$0$3 from 'node:events';
 import require$$0$5 from 'worker_threads';
 import require$$2 from 'perf_hooks';
 import require$$4$1 from 'util/types';
+import require$$10 from 'node:crypto';
 import require$$3 from 'http2';
 import require$$2$1 from 'async_hooks';
 import require$$1$1 from 'console';
@@ -6376,6 +6377,14 @@ const { isUint8Array, isArrayBuffer } = require$$4$1;
 const { File: UndiciFile } = file;
 const { parseMIMEType: parseMIMEType$1, serializeAMimeType: serializeAMimeType$2 } = dataURL;
 
+let random;
+try {
+  const crypto = require$$10;
+  random = (max) => crypto.randomInt(0, max);
+} catch {
+  random = (max) => Math.floor(Math.random(max));
+}
+
 let ReadableStream$2 = globalThis.ReadableStream;
 
 /** @type {globalThis['File']} */
@@ -6461,7 +6470,7 @@ function extractBody$3 (object, keepalive = false) {
     // Set source to a copy of the bytes held by object.
     source = new Uint8Array(object.buffer.slice(object.byteOffset, object.byteOffset + object.byteLength));
   } else if (util$7.isFormDataLike(object)) {
-    const boundary = `----formdata-undici-0${`${Math.floor(Math.random() * 1e11)}`.padStart(11, '0')}`;
+    const boundary = `----formdata-undici-0${`${random(1e11)}`.padStart(11, '0')}`;
     const prefix = `--${boundary}\r\nContent-Disposition: form-data`;
 
     /*! formdata-polyfill. MIT License. Jimmy Wärting <https://jimmy.warting.se/opensource> */
