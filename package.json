@@ -41,6 +41,6 @@
   },
   "devDependencies": {
     "microbundle": "^0.15.1",
-    "tap": "^21.1.0"
+    "tap": "^21.1.1"
   }
 }
