@@ -2,7 +2,7 @@
 import require$$0 from 'os';
 import require$$0$1 from 'crypto';
 import fs_1 from 'fs';
-import require$$0$6 from 'path';
+import require$$0$5 from 'path';
 import http$1 from 'http';
 import https$1 from 'https';
 import net from 'net';
@@ -11,14 +11,14 @@ import EE from 'events';
 import assert from 'assert';
 import nodeUtil from 'util';
 import stream$2 from 'stream';
-import require$$0$2 from 'buffer';
+import node_buffer from 'buffer';
 import require$$4 from 'querystring';
 import require$$11 from 'stream/web';
 import diagnosticsChannel from 'diagnostics_channel';
-import require$$0$4 from 'node:stream';
+import require$$0$3 from 'node:stream';
 import require$$1 from 'node:util';
-import require$$0$3 from 'node:events';
-import require$$0$5 from 'worker_threads';
+import require$$0$2 from 'node:events';
+import require$$0$4 from 'worker_threads';
 import require$$2 from 'perf_hooks';
 import require$$4$1 from 'util/types';
 import require$$10 from 'node:crypto';
@@ -31,6 +31,7 @@ import string_decoder_1 from 'string_decoder';
 import require$$2$2 from 'child_process';
 import timers_1 from 'timers';
 import { readFile } from 'fs/promises';
+import node_process from 'process';
 
 var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -1010,7 +1011,7 @@ const { IncomingMessage } = http$1;
 
 
 const { InvalidArgumentError: InvalidArgumentError$k } = errors$2;
-const { Blob: Blob$5 } = require$$0$2;
+const { Blob: Blob$5 } = node_buffer;
 
 const { stringify: stringify$7 } = require$$4;
 const { headerNameLowerCasedRecord } = constants$4;
@@ -1647,7 +1648,7 @@ var timers = {
  * Based heavily on the Streaming Boyer-Moore-Horspool C++ implementation
  * by Hongli Lai at: https://github.com/FooBarWidget/boyer-moore-horspool
  */
-const EventEmitter$1 = require$$0$3.EventEmitter;
+const EventEmitter$1 = require$$0$2.EventEmitter;
 const inherits$5 = require$$1.inherits;
 
 function SBMH (needle) {
@@ -1849,7 +1850,7 @@ SBMH.prototype._sbmh_memcmp = function (data, pos, len) {
 var sbmh = SBMH;
 
 const inherits$4 = require$$1.inherits;
-const ReadableStream$4 = require$$0$4.Readable;
+const ReadableStream$4 = require$$0$3.Readable;
 
 function PartStream (opts) {
   ReadableStream$4.call(this, opts);
@@ -1875,7 +1876,7 @@ var getLimit = function getLimit (limits, name, defaultLimit) {
   return limits[name]
 };
 
-const EventEmitter = require$$0$3.EventEmitter;
+const EventEmitter = require$$0$2.EventEmitter;
 const inherits$3 = require$$1.inherits;
 
 
@@ -1974,7 +1975,7 @@ HeaderParser.prototype._parseHeader = function () {
 
 var HeaderParser_1 = HeaderParser;
 
-const WritableStream$1 = require$$0$4.Writable;
+const WritableStream$1 = require$$0$3.Writable;
 const inherits$2 = require$$1.inherits;
 
 
@@ -2515,7 +2516,7 @@ var basename = function basename (path) {
 //  * support limits.fieldNameSize
 //     -- this will require modifications to utils.parseParams
 
-const { Readable: Readable$3 } = require$$0$4;
+const { Readable: Readable$3 } = require$$0$3;
 const { inherits: inherits$1 } = require$$1;
 
 
@@ -3051,7 +3052,7 @@ UrlEncoded.prototype.end = function () {
 
 var urlencoded = UrlEncoded;
 
-const WritableStream = require$$0$4.Writable;
+const WritableStream = require$$0$3.Writable;
 const { inherits } = require$$1;
 
 
@@ -3138,7 +3139,7 @@ main.default = _default$C;
 main.Busboy = Busboy_1;
 main.Dicer = Dicer_1;
 
-const { MessageChannel, receiveMessageOnPort } = require$$0$5;
+const { MessageChannel, receiveMessageOnPort } = require$$0$4;
 
 const corsSafeListedMethods = ['GET', 'HEAD', 'POST'];
 const corsSafeListedMethodsSet$1 = new Set(corsSafeListedMethods);
@@ -5123,7 +5124,7 @@ var webidl_1 = {
   webidl: webidl$e
 };
 
-const { atob: atob$1 } = require$$0$2;
+const { atob: atob$1 } = node_buffer;
 const { isomorphicDecode } = util$6;
 
 const encoder$1 = new TextEncoder();
@@ -5750,7 +5751,7 @@ var dataURL = {
   serializeAMimeType: serializeAMimeType$4
 };
 
-const { Blob: Blob$4, File: NativeFile$2 } = require$$0$2;
+const { Blob: Blob$4, File: NativeFile$2 } = node_buffer;
 const { types: types$4 } = nodeUtil;
 const { kState: kState$9 } = symbols$3;
 const { isBlobLike: isBlobLike$5 } = util$6;
@@ -6097,7 +6098,7 @@ const { isBlobLike: isBlobLike$4, toUSVString: toUSVString$2, makeIterator: make
 const { kState: kState$8 } = symbols$3;
 const { File: UndiciFile$1, FileLike, isFileLike } = file;
 const { webidl: webidl$c } = webidl_1;
-const { Blob: Blob$3, File: NativeFile$1 } = require$$0$2;
+const { Blob: Blob$3, File: NativeFile$1 } = node_buffer;
 
 /** @type {globalThis['File']} */
 const File$1 = NativeFile$1 ?? UndiciFile$1;
@@ -6369,7 +6370,7 @@ const { FormData: FormData$1 } = formdata;
 const { kState: kState$7 } = symbols$3;
 const { webidl: webidl$b } = webidl_1;
 const { DOMException: DOMException$5, structuredClone } = constants$3;
-const { Blob: Blob$2, File: NativeFile } = require$$0$2;
+const { Blob: Blob$2, File: NativeFile } = node_buffer;
 const { kBodyUsed: kBodyUsed$1 } = symbols$4;
 
 const { isErrored: isErrored$1 } = util$7;
@@ -11762,7 +11763,7 @@ function consumeEnd (consume) {
       resolve(dst.buffer);
     } else if (type === 'blob') {
       if (!Blob$1) {
-        Blob$1 = require$$0$2.Blob;
+        Blob$1 = node_buffer.Blob;
       }
       resolve(new Blob$1(body, { type: stream[kContentType] }));
     }
@@ -17181,7 +17182,7 @@ function schemeFetch (fetchParams) {
     }
     case 'blob:': {
       if (!resolveObjectURL) {
-        resolveObjectURL = require$$0$2.resolveObjectURL;
+        resolveObjectURL = node_buffer.resolveObjectURL;
       }
 
       // 1. Let blobURLEntry be request’s current URL’s blob URL entry.
@@ -18837,7 +18838,7 @@ const { DOMException: DOMException$2 } = constants$3;
 const { serializeAMimeType, parseMIMEType } = dataURL;
 const { types: types$2 } = nodeUtil;
 const { StringDecoder } = string_decoder_1;
-const { btoa: btoa$1 } = require$$0$2;
+const { btoa: btoa$1 } = node_buffer;
 
 /** @type {PropertyDescriptor} */
 const staticPropertyDescriptors$3 = {
@@ -21434,7 +21435,7 @@ var symbols = {
 
 const { webidl: webidl$1 } = webidl_1;
 const { kEnumerableProperty: kEnumerableProperty$1 } = util$7;
-const { MessagePort } = require$$0$5;
+const { MessagePort } = require$$0$4;
 
 /**
  * @see https://html.spec.whatwg.org/multipage/comms.html#messageevent
@@ -24572,7 +24573,7 @@ var __importStar = (commonjsGlobal && commonjsGlobal.__importStar) || function (
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.toPlatformPath = exports.toWin32Path = exports.toPosixPath = void 0;
-const path = __importStar(require$$0$6);
+const path = __importStar(require$$0$5);
 /**
  * toPosixPath converts the given path to the posix form. On Windows, \\ will be
  * replaced with /.
@@ -24643,7 +24644,7 @@ var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCmdPath = exports.tryGetExecutablePath = exports.isRooted = exports.isDirectory = exports.exists = exports.READONLY = exports.UV_FS_O_EXLOCK = exports.IS_WINDOWS = exports.unlink = exports.symlink = exports.stat = exports.rmdir = exports.rm = exports.rename = exports.readlink = exports.readdir = exports.open = exports.mkdir = exports.lstat = exports.copyFile = exports.chmod = void 0;
 const fs = __importStar(fs_1);
-const path = __importStar(require$$0$6);
+const path = __importStar(require$$0$5);
 _a = fs.promises
 // export const {open} = 'fs'
 , exports.chmod = _a.chmod, exports.copyFile = _a.copyFile, exports.lstat = _a.lstat, exports.mkdir = _a.mkdir, exports.open = _a.open, exports.readdir = _a.readdir, exports.readlink = _a.readlink, exports.rename = _a.rename, exports.rm = _a.rm, exports.rmdir = _a.rmdir, exports.stat = _a.stat, exports.symlink = _a.symlink, exports.unlink = _a.unlink;
@@ -24827,7 +24828,7 @@ var __awaiter = (commonjsGlobal && commonjsGlobal.__awaiter) || function (thisAr
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findInPath = exports.which = exports.mkdirP = exports.rmRF = exports.mv = exports.cp = void 0;
 
-const path = __importStar(require$$0$6);
+const path = __importStar(require$$0$5);
 const ioUtil$1 = __importStar(ioUtil);
 /**
  * Copies a file or folder.
@@ -25130,7 +25131,7 @@ exports.argStringToArray = exports.ToolRunner = void 0;
 const os = __importStar(require$$0);
 const events = __importStar(EE);
 const child = __importStar(require$$2$2);
-const path = __importStar(require$$0$6);
+const path = __importStar(require$$0$5);
 const io$1 = __importStar(io);
 const ioUtil$1 = __importStar(ioUtil);
 
@@ -25956,7 +25957,7 @@ exports.platform = exports.toPlatformPath = exports.toWin32Path = exports.toPosi
 
 
 const os = __importStar(require$$0);
-const path = __importStar(require$$0$6);
+const path = __importStar(require$$0$5);
 
 /**
  * The code to exit an action
@@ -26622,7 +26623,7 @@ function removeUndefinedProperties(obj) {
   return obj;
 }
 
-function merge$1(defaults, route, options) {
+function merge$2(defaults, route, options) {
   if (typeof route === "string") {
     let [method, url] = route.split(" ");
     options = Object.assign(url ? { method, url } : { url: method }, options);
@@ -26876,16 +26877,16 @@ function parse$5(options) {
 }
 
 function endpointWithDefaults(defaults, route, options) {
-  return parse$5(merge$1(defaults, route, options));
+  return parse$5(merge$2(defaults, route, options));
 }
 
 function withDefaults$2(oldDefaults, newDefaults) {
-  const DEFAULTS = merge$1(oldDefaults, newDefaults);
+  const DEFAULTS = merge$2(oldDefaults, newDefaults);
   const endpoint = endpointWithDefaults.bind(null, DEFAULTS);
   return Object.assign(endpoint, {
     DEFAULTS,
     defaults: withDefaults$2.bind(null, DEFAULTS),
-    merge: merge$1.bind(null, DEFAULTS),
+    merge: merge$2.bind(null, DEFAULTS),
     parse: parse$5
   });
 }
@@ -32752,7 +32753,7 @@ var array = /*#__PURE__*/Object.defineProperty({
 
 
 var calcLineCount_1 = calcLineCount;
-var merge_2 = merge;
+var merge_2$1 = merge$1;
 /*istanbul ignore end*/
 
 
@@ -32787,7 +32788,7 @@ function calcLineCount(hunk) {
     delete hunk.newLines;
   }
 }
-function merge(mine, theirs, base) {
+function merge$1(mine, theirs, base) {
   mine = loadPatch(mine, base);
   theirs = loadPatch(theirs, base);
   var ret = {};
@@ -33264,9 +33265,9 @@ function calcOldNewLineCount(lines) {
 }
 
 
-var merge_1 = /*#__PURE__*/Object.defineProperty({
+var merge_1$1 = /*#__PURE__*/Object.defineProperty({
 	calcLineCount: calcLineCount_1,
-	merge: merge_2
+	merge: merge_2$1
 }, '__esModule', {value: true});
 
 /*istanbul ignore start*/
@@ -33513,7 +33514,7 @@ Object.defineProperty(exports, "formatPatch", {
 Object.defineProperty(exports, "merge", {
   enumerable: true,
   get: function get() {
-    return merge_1.merge;
+    return merge_1$1.merge;
   }
 });
 Object.defineProperty(exports, "parsePatch", {
@@ -40650,8 +40651,7 @@ function createNodeAnchors(doc, prefix) {
     return {
         onAnchor: (source) => {
             aliasObjects.push(source);
-            if (!prevAnchors)
-                prevAnchors = anchorNames(doc);
+            prevAnchors ?? (prevAnchors = anchorNames(doc));
             const anchor = findNewAnchor(prefix, prevAnchors);
             prevAnchors.add(anchor);
             return anchor;
@@ -40845,23 +40845,36 @@ class Alias extends Node.NodeBase {
      * Resolve the value of this alias within `doc`, finding the last
      * instance of the `source` anchor before this node.
      */
-    resolve(doc) {
+    resolve(doc, ctx) {
+        let nodes;
+        if (ctx?.aliasResolveCache) {
+            nodes = ctx.aliasResolveCache;
+        }
+        else {
+            nodes = [];
+            visit_1$2.visit(doc, {
+                Node: (_key, node) => {
+                    if (identity.isAlias(node) || identity.hasAnchor(node))
+                        nodes.push(node);
+                }
+            });
+            if (ctx)
+                ctx.aliasResolveCache = nodes;
+        }
         let found = undefined;
-        visit_1$2.visit(doc, {
-            Node: (_key, node) => {
-                if (node === this)
-                    return visit_1$2.visit.BREAK;
-                if (node.anchor === this.source)
-                    found = node;
-            }
-        });
+        for (const node of nodes) {
+            if (node === this)
+                break;
+            if (node.anchor === this.source)
+                found = node;
+        }
         return found;
     }
     toJSON(_arg, ctx) {
         if (!ctx)
             return { source: this.source };
         const { anchors, doc, maxAliasCount } = ctx;
-        const source = this.resolve(doc);
+        const source = this.resolve(doc, ctx);
         if (!source) {
             const msg = `Unresolved alias (the anchor must be set before the alias): ${this.source}`;
             throw new ReferenceError(msg);
@@ -40994,8 +41007,7 @@ function createNode(value, tagName, ctx) {
     if (aliasDuplicateObjects && value && typeof value === 'object') {
         ref = sourceObjects.get(value);
         if (ref) {
-            if (!ref.anchor)
-                ref.anchor = onAnchor(value);
+            ref.anchor ?? (ref.anchor = onAnchor(value));
             return new Alias_1$1.Alias(ref.anchor);
         }
         else {
@@ -41544,7 +41556,7 @@ function blockString({ comment, type, value }, ctx, onComment, onChompKeep) {
     const { blockQuote, commentString, lineWidth } = ctx.options;
     // 1. Block can't end in whitespace unless the last line is non-empty.
     // 2. Strings consisting of only whitespace are best rendered explicitly.
-    if (!blockQuote || /\n[\t ]+$/.test(value) || /^\s*$/.test(value)) {
+    if (!blockQuote || /\n[\t ]+$/.test(value)) {
         return quotedString(value, ctx);
     }
     const indent = ctx.indent ||
@@ -41604,23 +41616,32 @@ function blockString({ comment, type, value }, ctx, onComment, onChompKeep) {
         start = start.replace(/\n+/g, `$&${indent}`);
     }
     const indentSize = indent ? '2' : '1'; // root is at -1
-    let header = (literal ? '|' : '>') + (startWithSpace ? indentSize : '') + chomp;
+    // Leading | or > is added later
+    let header = (startWithSpace ? indentSize : '') + chomp;
     if (comment) {
         header += ' ' + commentString(comment.replace(/ ?[\r\n]+/g, ' '));
         if (onComment)
             onComment();
     }
-    if (literal) {
-        value = value.replace(/\n+/g, `$&${indent}`);
-        return `${header}\n${indent}${start}${value}${end}`;
+    if (!literal) {
+        const foldedValue = value
+            .replace(/\n+/g, '\n$&')
+            .replace(/(?:^|\n)([\t ].*)(?:([\n\t ]*)\n(?![\n\t ]))?/g, '$1$2') // more-indented lines aren't folded
+            //                ^ more-ind. ^ empty     ^ capture next empty lines only at end of indent
+            .replace(/\n+/g, `$&${indent}`);
+        let literalFallback = false;
+        const foldOptions = getFoldOptions(ctx, true);
+        if (blockQuote !== 'folded' && type !== Scalar_1$1.Scalar.BLOCK_FOLDED) {
+            foldOptions.onOverflow = () => {
+                literalFallback = true;
+            };
+        }
+        const body = foldFlowLines_1.foldFlowLines(`${start}${foldedValue}${end}`, indent, foldFlowLines_1.FOLD_BLOCK, foldOptions);
+        if (!literalFallback)
+            return `>${header}\n${indent}${body}`;
     }
-    value = value
-        .replace(/\n+/g, '\n$&')
-        .replace(/(?:^|\n)([\t ].*)(?:([\n\t ]*)\n(?![\n\t ]))?/g, '$1$2') // more-indented lines aren't folded
-        //                ^ more-ind. ^ empty     ^ capture next empty lines only at end of indent
-        .replace(/\n+/g, `$&${indent}`);
-    const body = foldFlowLines_1.foldFlowLines(`${start}${value}${end}`, indent, foldFlowLines_1.FOLD_BLOCK, getFoldOptions(ctx, true));
-    return `${header}\n${indent}${body}`;
+    value = value.replace(/\n+/g, `$&${indent}`);
+    return `|${header}\n${indent}${start}${value}${end}`;
 }
 function plainString(item, ctx, onComment, onChompKeep) {
     const { type, value } = item;
@@ -41629,10 +41650,9 @@ function plainString(item, ctx, onComment, onChompKeep) {
         (inFlow && /[[\]{},]/.test(value))) {
         return quotedString(value, ctx);
     }
-    if (!value ||
-        /^[\n\t ,[\]{}#&*!|>'"%@`]|^[?-]$|^[?-][ \t]|[\n:][ \t]|[ \t]\n|[\n\t ]#|[\n\t :]$/.test(value)) {
+    if (/^[\n\t ,[\]{}#&*!|>'"%@`]|^[?-]$|^[?-][ \t]|[\n:][ \t]|[ \t]\n|[\n\t ]#|[\n\t :]$/.test(value)) {
         // not allowed:
-        // - empty string, '-' or '?'
+        // - '-' or '?'
         // - start with an indicator character (except [?:-]) or /[?-] /
         // - '\n ', ': ' or ' \n' anywhere
         // - '#' not preceded by a non-space char
@@ -41767,7 +41787,12 @@ function getTagObject(tags, item) {
     let obj;
     if (identity.isScalar(item)) {
         obj = item.value;
-        const match = tags.filter(t => t.identify?.(obj));
+        let match = tags.filter(t => t.identify?.(obj));
+        if (match.length > 1) {
+            const testMatch = match.filter(t => t.test);
+            if (testMatch.length > 0)
+                match = testMatch;
+        }
         tagObj =
             match.find(t => t.format === item.format) ?? match.find(t => !t.format);
     }
@@ -41776,7 +41801,7 @@ function getTagObject(tags, item) {
         tagObj = tags.find(t => t.nodeClass && obj instanceof t.nodeClass);
     }
     if (!tagObj) {
-        const name = obj?.constructor?.name ?? typeof obj;
+        const name = obj?.constructor?.name ?? (obj === null ? 'null' : typeof obj);
         throw new Error(`Tag not resolved for ${name} value`);
     }
     return tagObj;
@@ -41791,7 +41816,7 @@ function stringifyProps(node, tagObj, { anchors: anchors$1, doc }) {
         anchors$1.add(anchor);
         props.push(`&${anchor}`);
     }
-    const tag = node.tag ? node.tag : tagObj.default ? null : tagObj.tag;
+    const tag = node.tag ?? (tagObj.default ? null : tagObj.tag);
     if (tag)
         props.push(doc.directives.tagString(tag));
     return props.join(' ');
@@ -41817,8 +41842,7 @@ function stringify$4(item, ctx, onComment, onChompKeep) {
     const node = identity.isNode(item)
         ? item
         : ctx.doc.createNode(item, { onTagObj: o => (tagObj = o) });
-    if (!tagObj)
-        tagObj = getTagObject(ctx.doc.schema.tags, node);
+    tagObj ?? (tagObj = getTagObject(ctx.doc.schema.tags, node));
     const props = stringifyProps(node, tagObj, ctx);
     if (props.length > 0)
         ctx.indentAtStart = (ctx.indentAtStart ?? 0) + props.length + 1;
@@ -41998,8 +42022,8 @@ function debug(logLevel, ...messages) {
 }
 function warn(logLevel, warning) {
     if (logLevel === 'debug' || logLevel === 'warn') {
-        if (typeof process !== 'undefined' && process.emitWarning)
-            process.emitWarning(warning);
+        if (typeof node_process.emitWarning === 'function')
+            node_process.emitWarning(warning);
         else
             console.warn(warning);
     }
@@ -42013,19 +42037,82 @@ var log = {
 	warn: warn_1
 };
 
+// If the value associated with a merge key is a single mapping node, each of
+// its key/value pairs is inserted into the current mapping, unless the key
+// already exists in it. If the value associated with the merge key is a
+// sequence, then this sequence is expected to contain mapping nodes and each
+// of these nodes is merged in turn according to its order in the sequence.
+// Keys in mapping nodes earlier in the sequence override keys specified in
+// later mapping nodes. -- http://yaml.org/type/merge.html
 const MERGE_KEY = '<<';
-function addPairToJSMap(ctx, map, { key, value }) {
-    if (ctx?.doc.schema.merge && isMergeKey(key)) {
-        value = identity.isAlias(value) ? value.resolve(ctx.doc) : value;
-        if (identity.isSeq(value))
-            for (const it of value.items)
-                mergeToJSMap(ctx, map, it);
-        else if (Array.isArray(value))
-            for (const it of value)
-                mergeToJSMap(ctx, map, it);
-        else
-            mergeToJSMap(ctx, map, value);
+const merge = {
+    identify: value => value === MERGE_KEY ||
+        (typeof value === 'symbol' && value.description === MERGE_KEY),
+    default: 'key',
+    tag: 'tag:yaml.org,2002:merge',
+    test: /^<<$/,
+    resolve: () => Object.assign(new Scalar_1$1.Scalar(Symbol(MERGE_KEY)), {
+        addToJSMap: addMergeToJSMap
+    }),
+    stringify: () => MERGE_KEY
+};
+const isMergeKey = (ctx, key) => (merge.identify(key) ||
+    (identity.isScalar(key) &&
+        (!key.type || key.type === Scalar_1$1.Scalar.PLAIN) &&
+        merge.identify(key.value))) &&
+    ctx?.doc.schema.tags.some(tag => tag.tag === merge.tag && tag.default);
+function addMergeToJSMap(ctx, map, value) {
+    value = ctx && identity.isAlias(value) ? value.resolve(ctx.doc) : value;
+    if (identity.isSeq(value))
+        for (const it of value.items)
+            mergeValue(ctx, map, it);
+    else if (Array.isArray(value))
+        for (const it of value)
+            mergeValue(ctx, map, it);
+    else
+        mergeValue(ctx, map, value);
+}
+function mergeValue(ctx, map, value) {
+    const source = ctx && identity.isAlias(value) ? value.resolve(ctx.doc) : value;
+    if (!identity.isMap(source))
+        throw new Error('Merge sources must be maps or map aliases');
+    const srcMap = source.toJSON(null, ctx, Map);
+    for (const [key, value] of srcMap) {
+        if (map instanceof Map) {
+            if (!map.has(key))
+                map.set(key, value);
+        }
+        else if (map instanceof Set) {
+            map.add(key);
+        }
+        else if (!Object.prototype.hasOwnProperty.call(map, key)) {
+            Object.defineProperty(map, key, {
+                value,
+                writable: true,
+                enumerable: true,
+                configurable: true
+            });
+        }
     }
+    return map;
+}
+
+var addMergeToJSMap_1 = addMergeToJSMap;
+var isMergeKey_1 = isMergeKey;
+var merge_2 = merge;
+
+var merge_1 = {
+	addMergeToJSMap: addMergeToJSMap_1,
+	isMergeKey: isMergeKey_1,
+	merge: merge_2
+};
+
+function addPairToJSMap(ctx, map, { key, value }) {
+    if (identity.isNode(key) && key.addToJSMap)
+        key.addToJSMap(ctx, map, value);
+    // TODO: Should drop this special case for bare << handling
+    else if (merge_1.isMergeKey(ctx, key))
+        merge_1.addMergeToJSMap(ctx, map, value);
     else {
         const jsKey = toJS_1.toJS(key, '', ctx);
         if (map instanceof Map) {
@@ -42050,44 +42137,10 @@ function addPairToJSMap(ctx, map, { key, value }) {
     }
     return map;
 }
-const isMergeKey = (key) => key === MERGE_KEY ||
-    (identity.isScalar(key) &&
-        key.value === MERGE_KEY &&
-        (!key.type || key.type === Scalar_1$1.Scalar.PLAIN));
-// If the value associated with a merge key is a single mapping node, each of
-// its key/value pairs is inserted into the current mapping, unless the key
-// already exists in it. If the value associated with the merge key is a
-// sequence, then this sequence is expected to contain mapping nodes and each
-// of these nodes is merged in turn according to its order in the sequence.
-// Keys in mapping nodes earlier in the sequence override keys specified in
-// later mapping nodes. -- http://yaml.org/type/merge.html
-function mergeToJSMap(ctx, map, value) {
-    const source = ctx && identity.isAlias(value) ? value.resolve(ctx.doc) : value;
-    if (!identity.isMap(source))
-        throw new Error('Merge sources must be maps or map aliases');
-    const srcMap = source.toJSON(null, ctx, Map);
-    for (const [key, value] of srcMap) {
-        if (map instanceof Map) {
-            if (!map.has(key))
-                map.set(key, value);
-        }
-        else if (map instanceof Set) {
-            map.add(key);
-        }
-        else if (!Object.prototype.hasOwnProperty.call(map, key)) {
-            Object.defineProperty(map, key, {
-                value,
-                writable: true,
-                enumerable: true,
-                configurable: true
-            });
-        }
-    }
-    return map;
-}
 function stringifyKey(key, jsKey, ctx) {
     if (jsKey === null)
         return '';
+    // eslint-disable-next-line @typescript-eslint/no-base-to-string
     if (typeof jsKey !== 'object')
         return String(jsKey);
     if (identity.isNode(key) && ctx?.doc) {
@@ -42816,7 +42869,7 @@ const jsonScalars = [
         identify: value => typeof value === 'boolean',
         default: true,
         tag: 'tag:yaml.org,2002:bool',
-        test: /^true|false$/,
+        test: /^true$|^false$/,
         resolve: str => str === 'true',
         stringify: stringifyJSON
     },
@@ -42867,8 +42920,8 @@ const binary = {
      *   document.querySelector('#photo').src = URL.createObjectURL(blob)
      */
     resolve(src, onError) {
-        if (typeof Buffer === 'function') {
-            return Buffer.from(src, 'base64');
+        if (typeof node_buffer.Buffer === 'function') {
+            return node_buffer.Buffer.from(src, 'base64');
         }
         else if (typeof atob === 'function') {
             // On IE 11, atob() can't handle newlines
@@ -42884,13 +42937,15 @@ const binary = {
         }
     },
     stringify({ comment, type, value }, ctx, onComment, onChompKeep) {
+        if (!value)
+            return '';
         const buf = value; // checked earlier by binary.identify()
         let str;
-        if (typeof Buffer === 'function') {
+        if (typeof node_buffer.Buffer === 'function') {
             str =
-                buf instanceof Buffer
+                buf instanceof node_buffer.Buffer
                     ? buf.toString('base64')
-                    : Buffer.from(buf.buffer).toString('base64');
+                    : node_buffer.Buffer.from(buf.buffer).toString('base64');
         }
         else if (typeof btoa === 'function') {
             let s = '';
@@ -42901,8 +42956,7 @@ const binary = {
         else {
             throw new Error('This environment does not support writing binary tags; either Buffer or btoa is required');
         }
-        if (!type)
-            type = Scalar_1$1.Scalar.BLOCK_LITERAL;
+        type ?? (type = Scalar_1$1.Scalar.BLOCK_LITERAL);
         if (type !== Scalar_1$1.Scalar.QUOTE_DOUBLE) {
             const lineWidth = Math.max(ctx.options.lineWidth - ctx.indent.length, ctx.options.minContentWidth);
             const n = Math.ceil(str.length / lineWidth);
@@ -43433,7 +43487,7 @@ const timestamp = {
         }
         return new Date(date);
     },
-    stringify: ({ value }) => value.toISOString().replace(/((T00:00)?:00)?\.000Z$/, '')
+    stringify: ({ value }) => value?.toISOString().replace(/(T00:00:00)?\.000Z$/, '') ?? ''
 };
 
 var floatTime_1 = floatTime;
@@ -43461,6 +43515,7 @@ const schema = [
     float_1.floatExp,
     float_1.float,
     binary_1.binary,
+    merge_1.merge,
     omap_1.omap,
     pairs_1.pairs,
     set_1.set,
@@ -43494,6 +43549,7 @@ const tagsByName = {
     intOct: int_1$1.intOct,
     intTime: timestamp_1.intTime,
     map: map_1.map,
+    merge: merge_1.merge,
     null: _null.nullTag,
     omap: omap_1.omap,
     pairs: pairs_1.pairs,
@@ -43503,13 +43559,20 @@ const tagsByName = {
 };
 const coreKnownTags = {
     'tag:yaml.org,2002:binary': binary_1.binary,
+    'tag:yaml.org,2002:merge': merge_1.merge,
     'tag:yaml.org,2002:omap': omap_1.omap,
     'tag:yaml.org,2002:pairs': pairs_1.pairs,
     'tag:yaml.org,2002:set': set_1.set,
     'tag:yaml.org,2002:timestamp': timestamp_1.timestamp
 };
-function getTags(customTags, schemaName) {
-    let tags = schemas.get(schemaName);
+function getTags(customTags, schemaName, addMergeTag) {
+    const schemaTags = schemas.get(schemaName);
+    if (schemaTags && !customTags) {
+        return addMergeTag && !schemaTags.includes(merge_1.merge)
+            ? schemaTags.concat(merge_1.merge)
+            : schemaTags.slice();
+    }
+    let tags = schemaTags;
     if (!tags) {
         if (Array.isArray(customTags))
             tags = [];
@@ -43528,17 +43591,21 @@ function getTags(customTags, schemaName) {
     else if (typeof customTags === 'function') {
         tags = customTags(tags.slice());
     }
-    return tags.map(tag => {
-        if (typeof tag !== 'string')
-            return tag;
-        const tagObj = tagsByName[tag];
-        if (tagObj)
-            return tagObj;
-        const keys = Object.keys(tagsByName)
-            .map(key => JSON.stringify(key))
-            .join(', ');
-        throw new Error(`Unknown custom tag "${tag}"; use one of ${keys}`);
-    });
+    if (addMergeTag)
+        tags = tags.concat(merge_1.merge);
+    return tags.reduce((tags, tag) => {
+        const tagObj = typeof tag === 'string' ? tagsByName[tag] : tag;
+        if (!tagObj) {
+            const tagName = JSON.stringify(tag);
+            const keys = Object.keys(tagsByName)
+                .map(key => JSON.stringify(key))
+                .join(', ');
+            throw new Error(`Unknown custom tag ${tagName}; use one of ${keys}`);
+        }
+        if (!tags.includes(tagObj))
+            tags.push(tagObj);
+        return tags;
+    }, []);
 }
 
 var coreKnownTags_1 = coreKnownTags;
@@ -43557,10 +43624,9 @@ class Schema {
             : compat
                 ? tags.getTags(null, compat)
                 : null;
-        this.merge = !!merge;
         this.name = (typeof schema === 'string' && schema) || 'core';
         this.knownTags = resolveKnownTags ? tags.coreKnownTags : {};
-        this.tags = tags.getTags(customTags, this.name);
+        this.tags = tags.getTags(customTags, this.name, merge);
         this.toStringOptions = toStringDefaults ?? null;
         Object.defineProperty(this, identity.MAP, { value: map_1.map });
         Object.defineProperty(this, identity.SCALAR, { value: string_1.string });
@@ -43697,6 +43763,7 @@ class Document {
             logLevel: 'warn',
             prettyErrors: true,
             strict: true,
+            stringKeys: false,
             uniqueKeys: true,
             version: '1.2'
         }, options);
@@ -43920,7 +43987,7 @@ class Document {
                     this.directives.yaml.version = '1.1';
                 else
                     this.directives = new directives.Directives({ version: '1.1' });
-                opt = { merge: true, resolveKnownTags: false, schema: 'yaml-1.1' };
+                opt = { resolveKnownTags: false, schema: 'yaml-1.1' };
                 break;
             case '1.2':
             case 'next':
@@ -43928,7 +43995,7 @@ class Document {
                     this.directives.yaml.version = version;
                 else
                     this.directives = new directives.Directives({ version });
-                opt = { merge: false, resolveKnownTags: true, schema: 'core' };
+                opt = { resolveKnownTags: true, schema: 'core' };
                 break;
             case null:
                 if (this.directives)
@@ -44124,7 +44191,7 @@ function resolveProps(tokens, { flow, indicator, next, offset, onError, parentIn
                 if (atNewline) {
                     if (comment)
                         comment += token.source;
-                    else
+                    else if (!found || indicator !== 'seq-item-ind')
                         spaceBefore = true;
                 }
                 else
@@ -44141,8 +44208,7 @@ function resolveProps(tokens, { flow, indicator, next, offset, onError, parentIn
                 if (token.source.endsWith(':'))
                     onError(token.offset + token.source.length - 1, 'BAD_ALIAS', 'Anchor ending in : is ambiguous', true);
                 anchor = token;
-                if (start === null)
-                    start = token.offset;
+                start ?? (start = token.offset);
                 atNewline = false;
                 hasSpace = false;
                 reqSpace = true;
@@ -44151,8 +44217,7 @@ function resolveProps(tokens, { flow, indicator, next, offset, onError, parentIn
                 if (tag)
                     onError(token, 'MULTIPLE_TAGS', 'A node can have at most one tag');
                 tag = token;
-                if (start === null)
-                    start = token.offset;
+                start ?? (start = token.offset);
                 atNewline = false;
                 hasSpace = false;
                 reqSpace = true;
@@ -44283,11 +44348,7 @@ function mapIncludes(ctx, items, search) {
         return false;
     const isEqual = typeof uniqueKeys === 'function'
         ? uniqueKeys
-        : (a, b) => a === b ||
-            (identity.isScalar(a) &&
-                identity.isScalar(b) &&
-                a.value === b.value &&
-                !(a.value === '<<' && ctx.schema.merge));
+        : (a, b) => a === b || (identity.isScalar(a) && identity.isScalar(b) && a.value === b.value);
     return items.some(pair => isEqual(pair.key, search));
 }
 
@@ -44342,12 +44403,14 @@ function resolveBlockMap({ composeNode, composeEmptyNode }, ctx, bm, onError, ta
             onError(offset, 'BAD_INDENT', startColMsg);
         }
         // key value
+        ctx.atKey = true;
         const keyStart = keyProps.end;
         const keyNode = key
             ? composeNode(ctx, key, keyProps, onError)
             : composeEmptyNode(ctx, keyStart, start, null, keyProps, onError);
         if (ctx.schema.compat)
             utilFlowIndentCheck.flowIndentCheck(bm.indent, key, onError);
+        ctx.atKey = false;
         if (utilMapIncludes.mapIncludes(ctx, map.items, keyNode))
             onError(keyStart, 'DUPLICATE_KEY', 'Map keys must be unique');
         // value properties
@@ -44413,6 +44476,8 @@ function resolveBlockSeq({ composeNode, composeEmptyNode }, ctx, bs, onError, ta
     const seq = new NodeClass(ctx.schema);
     if (ctx.atRoot)
         ctx.atRoot = false;
+    if (ctx.atKey)
+        ctx.atKey = false;
     let offset = bs.offset;
     let commentEnd = null;
     for (const { start, value } of bs.items) {
@@ -44509,6 +44574,8 @@ function resolveFlowCollection({ composeNode, composeEmptyNode }, ctx, fc, onErr
     const atRoot = ctx.atRoot;
     if (atRoot)
         ctx.atRoot = false;
+    if (ctx.atKey)
+        ctx.atKey = false;
     let offset = fc.offset + fc.start.source.length;
     for (let i = 0; i < fc.items.length; ++i) {
         const collItem = fc.items[i];
@@ -44588,12 +44655,14 @@ function resolveFlowCollection({ composeNode, composeEmptyNode }, ctx, fc, onErr
         else {
             // item is a key+value pair
             // key value
+            ctx.atKey = true;
             const keyStart = props.end;
             const keyNode = key
                 ? composeNode(ctx, key, props, onError)
                 : composeEmptyNode(ctx, keyStart, start, null, props, onError);
             if (isBlock(key))
                 onError(keyNode.range, 'BLOCK_IN_FLOW', blockMsg);
+            ctx.atKey = false;
             // value properties
             const valueProps = resolveProps_1.resolveProps(sep ?? [], {
                 flow: fcName,
@@ -44755,8 +44824,8 @@ function composeCollection(CN, ctx, token, props, onError) {
             tag = kt;
         }
         else {
-            if (kt?.collection) {
-                onError(tagToken, 'BAD_COLLECTION_TYPE', `${kt.tag} used for ${expType} collection, but expects ${kt.collection}`, true);
+            if (kt) {
+                onError(tagToken, 'BAD_COLLECTION_TYPE', `${kt.tag} used for ${expType} collection, but expects ${kt.collection ?? 'scalar'}`, true);
             }
             else {
                 onError(tagToken, 'TAG_RESOLVE_FAILED', `Unresolved tag: ${tagName}`, true);
@@ -45215,11 +45284,16 @@ function composeScalar(ctx, token, tagToken, onError) {
     const tagName = tagToken
         ? ctx.directives.tagName(tagToken.source, msg => onError(tagToken, 'TAG_RESOLVE_FAILED', msg))
         : null;
-    const tag = tagToken && tagName
-        ? findScalarTagByName(ctx.schema, value, tagName, tagToken, onError)
-        : token.type === 'scalar'
-            ? findScalarTagByTest(ctx, value, token, onError)
-            : ctx.schema[identity.SCALAR];
+    let tag;
+    if (ctx.options.stringKeys && ctx.atKey) {
+        tag = ctx.schema[identity.SCALAR];
+    }
+    else if (tagName)
+        tag = findScalarTagByName(ctx.schema, value, tagName, tagToken, onError);
+    else if (token.type === 'scalar')
+        tag = findScalarTagByTest(ctx, value, token, onError);
+    else
+        tag = ctx.schema[identity.SCALAR];
     let scalar;
     try {
         const res = tag.resolve(value, msg => onError(tagToken ?? token, 'TAG_RESOLVE_FAILED', msg), ctx.options);
@@ -45267,8 +45341,9 @@ function findScalarTagByName(schema, value, tagName, tagToken, onError) {
     onError(tagToken, 'TAG_RESOLVE_FAILED', `Unresolved tag: ${tagName}`, tagName !== 'tag:yaml.org,2002:str');
     return schema[identity.SCALAR];
 }
-function findScalarTagByTest({ directives, schema }, value, token, onError) {
-    const tag = schema.tags.find(tag => tag.default && tag.test?.test(value)) || schema[identity.SCALAR];
+function findScalarTagByTest({ atKey, directives, schema }, value, token, onError) {
+    const tag = schema.tags.find(tag => (tag.default === true || (atKey && tag.default === 'key')) &&
+        tag.test?.test(value)) || schema[identity.SCALAR];
     if (schema.compat) {
         const compat = schema.compat.find(tag => tag.default && tag.test?.test(value)) ??
             schema[identity.SCALAR];
@@ -45290,8 +45365,7 @@ var composeScalar_1 = {
 
 function emptyScalarPosition(offset, before, pos) {
     if (before) {
-        if (pos === null)
-            pos = before.length;
+        pos ?? (pos = before.length);
         for (let i = pos - 1; i >= 0; --i) {
             let st = before[i];
             switch (st.type) {
@@ -45322,6 +45396,7 @@ var utilEmptyScalarPosition = {
 
 const CN = { composeNode, composeEmptyNode };
 function composeNode(ctx, token, props, onError) {
+    const atKey = ctx.atKey;
     const { spaceBefore, comment, anchor, tag } = props;
     let node;
     let isSrcToken = true;
@@ -45357,6 +45432,14 @@ function composeNode(ctx, token, props, onError) {
     }
     if (anchor && node.anchor === '')
         onError(anchor, 'BAD_ALIAS', 'Anchor cannot be an empty string');
+    if (atKey &&
+        ctx.options.stringKeys &&
+        (!identity.isScalar(node) ||
+            typeof node.value !== 'string' ||
+            (node.tag && node.tag !== 'tag:yaml.org,2002:str'))) {
+        const msg = 'With stringKeys, all keys must be strings';
+        onError(tag ?? token, 'NON_STRING_KEY', msg);
+    }
     if (spaceBefore)
         node.spaceBefore = true;
     if (comment) {
@@ -45417,6 +45500,7 @@ function composeDoc(options, directives, { offset, start, value, end }, onError)
     const opts = Object.assign({ _directives: directives }, options);
     const doc = new Document_1$1.Document(undefined, opts);
     const ctx = {
+        atKey: false,
         atRoot: true,
         directives: doc.directives,
         options: doc.options,
@@ -45581,7 +45665,7 @@ class Composer$1 {
     }
     /** Advance the composer by one CST token. */
     *next(token) {
-        if (process.env.LOG_STREAM)
+        if (node_process.env.LOG_STREAM)
             console.dir(token, { depth: null });
         switch (token.type) {
             case 'directive':
@@ -47108,7 +47192,7 @@ class Parser$1 {
      */
     *next(source) {
         this.source = source;
-        if (process.env.LOG_TOKENS)
+        if (node_process.env.LOG_TOKENS)
             console.log('|', cst.prettyToken(source));
         if (this.atScalar) {
             this.atScalar = false;
@@ -47614,7 +47698,20 @@ class Parser$1 {
                 default: {
                     const bv = this.startBlockValue(map);
                     if (bv) {
-                        if (atMapIndent && bv.type !== 'block-seq') {
+                        if (bv.type === 'block-seq') {
+                            if (!it.explicitKey &&
+                                it.sep &&
+                                !includesToken(it.sep, 'newline')) {
+                                yield* this.pop({
+                                    type: 'error',
+                                    offset: this.offset,
+                                    message: 'Unexpected block-seq-ind on same line with key',
+                                    source: this.source
+                                });
+                                return;
+                            }
+                        }
+                        else if (atMapIndent) {
                             map.items.push({ start });
                         }
                         this.stack.push(bv);
@@ -47991,6 +48088,8 @@ function stringify$1(value, replacer, options) {
         if (!keepUndefined)
             return undefined;
     }
+    if (identity.isDocument(value) && !_replacer)
+        return value.toString(options);
     return new Document_1$1.Document(value, _replacer, options).toString(options);
 }
 
