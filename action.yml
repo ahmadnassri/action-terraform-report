@@ -29,6 +29,16 @@ inputs:
     default: "true"
     required: false
 
+  show-header:
+    description: include header in the comment
+    default: "true"
+    required: false
+
+  show-footer:
+    description: include footer in the comment
+    default: "true"
+    required: false
+
   remove-stale-reports:
     description: remove report comments for old commits?
     default: "false"
