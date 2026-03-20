@@ -17,19 +17,22 @@ test('context', async assert => {
   const { default: report } = await import('../lib/report.js')
 
   const data = {
-    showPlan: 'true',
-    showDiff: 'true',
+    showPlan: true,
+    showDiff: true,
     textContent: 'foobar',
     diff: {
       patches: ['foo'],
       summary: { create: 0, update: 1, delete: 0 }
     },
-    customHeader: ':robot: *Terraform Report* - This is a custom header'
+    customHeader: [':robot: *Terraform Report* - This is a custom header'],
+    customFooter: [':robot: *Terraform Report* - This is a custom footer'],
+    showHeader: true,
+    showFooter: true
   }
 
   report(data)
 
-  assert.equal(data.body, fixture.toString())
+  assert.equal(data.body, fixture.toString().trim())
 })
 
 test('comment maximum length exceeded', async assert => {
@@ -44,18 +47,20 @@ test('comment maximum length exceeded', async assert => {
 
   const commentMaximumLength = 65536
 
-  const data = {
-    showPlan: 'true',
-    showDiff: 'true',
+const data = {
+    showPlan: true,
+    showDiff: true,
     textContent: new Array(commentMaximumLength + 1).join( 'x' ),
     diff: {
       patches: ['foo'],
       summary: { create: 0, update: 1, delete: 0 }
     },
-    customHeader: ':robot: *Terraform Report* - This is a custom header'
+    customHeader: [':robot: *Terraform Report* - This is a custom header'],
+    showHeader: true,
+    showFooter: true
   }
 
   report(data)
 
-  assert.equal(data.body, fixture.toString())
+  assert.equal(data.body, fixture.toString().trim())
 })

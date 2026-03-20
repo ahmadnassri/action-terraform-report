@@ -19,36 +19,39 @@ inputs:
     description: path to Terraform Plan JSON output file
     required: true
 
-  show-diff:
-    description: include the diff view in the final output?
-    default: "false"
+  custom-header:
+    description: custom header text for the github comment
     required: false
 
-  show-plan:
-    description: include the terraform plan view in the final output?
-    default: "true"
+  custom-footer:
+    description: custom footer text for the github comment
     required: false
 
   show-header:
-    description: include header in the comment
+    description: include header in the comment?
     default: "true"
     required: false
 
   show-footer:
-    description: include footer in the comment
+    description: include footer in the comment?
+    default: "true"
+    required: false
+
+  show-diff:
+    description: include the diff view in the comment?
+    default: "false"
+    required: false
+
+  show-plan:
+    description: include the terraform plan view in the comment?
     default: "true"
     required: false
 
   remove-stale-reports:
     description: remove report comments for old commits?
-    default: "false"
-    required: false
-
-  custom-header:
-    description: The header text for the github comment
-    default: ":robot: Terraform Report"
+    default: "true"
     required: false
 
 runs:
-  using: node20
+  using: node24
   main: dist/index.js

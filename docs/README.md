@@ -30,33 +30,35 @@ jobs:
           # tell the action the plan outputs
           terraform-text: ${{ github.workspace }}/terraform.text
           terraform-json: ${{ github.workspace }}/terraform.json
-          remove-stale-reports: true
 ```
 
 > **Note**: Ensure `terraform_wrapper` is set to `false` to better capture the output into a file _(or use your own method)_
 
 ### Inputs
 
-| input                  | required | default                    | description                                                                        |
-| ---------------------- | -------- | -------------------------- | ---------------------------------------------------------------------------------- |
-| `terraform-text`       | ✅       | `-`                        | path to the file resulting from the output of `terraform show /path/to/plan`       |
-| `terraform-json`       | ✅       | `-`                        | path to the file resulting from the output of `terraform show -json /path/to/plan` |
-| `github-token`         | ❌       | `github.token`             | The GitHub token used to post comments on pull requests                            |
-| `show-plan`            | ❌       | `true`                     | include the terraform plan view in the final output?                               |
-| `show-diff`            | ❌       | `false`                    | include the diff view in the final output?                                         |
-| `remove-stale-reports` | ❌       | `false`                    | remove report comments for old commits?                                            |
-| `custom-header`        | ❌       | `:robot: Terraform Report` | The header text for the github comment                                             |
+| input                  | required | default                      | description                                                                        |
+| ---------------------- | -------- | ---------------------------- | ---------------------------------------------------------------------------------- |
+| `terraform-text`       | ✅       | `-`                          | path to the file resulting from the output of `terraform show /path/to/plan`       |
+| `terraform-json`       | ✅       | `-`                          | path to the file resulting from the output of `terraform show -json /path/to/plan` |
+| `github-token`         | ❌       | `github.token`               | The GitHub token used to post comments on pull requests                            |
+| `custom-header`        | ❌       | `:robot: *Terraform Report*` | custom header text for the github comment                                          |
+| `custom-footer`        | ❌       | `-`                          | custom footer text for the github comment                                          |
+| `show-header`          | ❌       | `false`                      | include header in the comment?                                                     |
+| `show-footer`          | ❌       | `false`                      | include footer in the comment?                                                     |
+| `show-plan`            | ❌       | `true`                       | include the terraform plan view in the comment?                                    |
+| `show-diff`            | ❌       | `false`                      | include the diff view in the comment?                                              |
+| `remove-stale-reports` | ❌       | `true`                       | remove report comments for old commits?                                            |
 
 ## Examples
 
 | Pull Request Comment _(default)_ |
-| ---------------------------------|
+| -------------------------------- |
 | ![](./docs/1.png)                |
 
 | Pull Request Comment _(Plan)_ |
-| ------------------------------|
+| ----------------------------- |
 | ![](./docs/2.png)             |
 
 | Pull Request Comment _(Diff)_ |
-| ------------------------------|
+| ----------------------------- |
 | ![](./docs/3.png)             |

@@ -29,7 +29,7 @@ await parse(data)
 report(data)
 
 // remove stale comment
-if (data.removeStaleReports === 'true') await stale(data)
+if (data.removeStaleReports) await stale(data)
 
 // post new comment
 post(data)
