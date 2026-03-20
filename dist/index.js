@@ -30140,6 +30140,7 @@ function context () {
     textPath: core$3.getInput('terraform-text'),
     jsonPath: core$3.getInput('terraform-json'),
     removeStaleReports: core$3.getBooleanInput('remove-stale-reports'),
+    showNoChanges: core$3.getBooleanInput('show-no-changes'),
     customHeader: core$3.getMultilineInput('custom-header'),
     customFooter: core$3.getMultilineInput('custom-footer'),
     showHeader: core$3.getBooleanInput('show-header'),
@@ -48504,8 +48505,14 @@ await parse(data);
 // generate report markdown
 report(data);
 
+// check if there are no changes
+const hasChanges = data.diff.summary.create > 0 || data.diff.summary.update > 0 || data.diff.summary.delete > 0;
+
 // remove stale comment
 if (data.removeStaleReports) await stale(data);
+
+// skip posting if no changes and show-no-changes is false
+if (!hasChanges && !data.showNoChanges) process.exit(0);
 
 // post new comment
 post(data);
