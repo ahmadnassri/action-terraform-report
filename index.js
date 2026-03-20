@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import core from '@actions/core'
+import { error } from '@actions/core'
 
 import context from './lib/context.js'
 import parse from './lib/parse.js'
@@ -11,7 +11,7 @@ import stale from './lib/stale.js'
 // error handler
 function errorHandler (err) {
   console.error(err)
-  core.error(`Unhandled error: ${err}`)
+  error(`Unhandled error: ${err}`)
   process.exit(1)
 }
 
