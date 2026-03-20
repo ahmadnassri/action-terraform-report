@@ -11,6 +11,7 @@ test('context', async assert => {
   process.env['INPUT_SHOW-PLAN'] = 'true'
   process.env['INPUT_SHOW-HEADER'] = 'true'
   process.env['INPUT_SHOW-FOOTER'] = 'true'
+  process.env['INPUT_SHOW-NO-CHANGES'] = 'true'
   process.env['INPUT_GITHUB-TOKEN'] = 'abc'
   process.env['INPUT_REMOVE-STALE-REPORTS'] = 'true'
   process.env['INPUT_CUSTOM-HEADER'] = 'abc'
@@ -30,6 +31,7 @@ test('context', async assert => {
   assert.match(data.textPath, 'fixtures/terraform.txt')
   assert.match(data.jsonPath, 'fixtures/terraform.json')
   assert.match(data.removeStaleReports, true)
+  assert.equal(data.showNoChanges, true)
   assert.match(data.customHeader, ['abc'])
   assert.match(data.customFooter, ['abc'])
   assert.equal(data.showHeader, true)
