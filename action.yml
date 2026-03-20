@@ -52,6 +52,11 @@ inputs:
     default: "true"
     required: false
 
+  show-no-changes:
+    description: post a comment even when there are no changes in the terraform plan?
+    default: "true"
+    required: false
+
 runs:
   using: node24
   main: dist/index.js

@@ -50,11 +50,12 @@ jobs:
 | `github-token`         | ❌       | `github.token`               | The GitHub token used to post comments on pull requests                            |
 | `custom-header`        | ❌       | `:robot: *Terraform Report*` | custom header text for the github comment                                          |
 | `custom-footer`        | ❌       | `-`                          | custom footer text for the github comment                                          |
-| `show-header`          | ❌       | `false`                      | include header in the comment?                                                     |
-| `show-footer`          | ❌       | `false`                      | include footer in the comment?                                                     |
+| `show-header`          | ❌       | `true`                       | include header in the comment?                                                     |
+| `show-footer`          | ❌       | `true`                       | include footer in the comment?                                                     |
 | `show-plan`            | ❌       | `true`                       | include the terraform plan view in the comment?                                    |
 | `show-diff`            | ❌       | `false`                      | include the diff view in the comment?                                              |
 | `remove-stale-reports` | ❌       | `true`                       | remove report comments for old commits?                                            |
+| `show-no-changes`      | ❌       | `true`                       | post a comment even when there are no changes in the terraform plan?               |
 
 ## Examples
 

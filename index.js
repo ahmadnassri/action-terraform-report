@@ -28,8 +28,14 @@ await parse(data)
 // generate report markdown
 report(data)
 
+// check if there are no changes
+const hasChanges = data.diff.summary.create > 0 || data.diff.summary.update > 0 || data.diff.summary.delete > 0
+
 // remove stale comment
 if (data.removeStaleReports) await stale(data)
+
+// skip posting if no changes and show-no-changes is false
+if (!hasChanges && !data.showNoChanges) process.exit(0)
 
 // post new comment
 post(data)
