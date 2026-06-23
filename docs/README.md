@@ -49,6 +49,7 @@ jobs:
 | `show-diff`            | ❌       | `false`                      | include the diff view in the comment?                                              |
 | `remove-stale-reports` | ❌       | `true`                       | remove report comments for old commits?                                            |
 | `show-no-changes`      | ❌       | `true`                       | post a comment even when there are no changes in the terraform plan?               |
+| `pr-number`            | ❌       | `-`                          | PR number to post the comment on (required when not triggered by a pull request event) |
 
 ## Examples
 

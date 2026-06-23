@@ -57,6 +57,10 @@ inputs:
     default: "true"
     required: false
 
+  pr-number:
+    description: PR number to post the comment on (required when not triggered by a pull request event)
+    required: false
+
 runs:
   using: node24
   main: dist/index.js

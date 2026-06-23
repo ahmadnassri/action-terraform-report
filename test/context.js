@@ -36,4 +36,16 @@ test('context', async assert => {
   assert.match(data.customFooter, ['abc'])
   assert.equal(data.showHeader, true)
   assert.equal(data.showFooter, true)
+  assert.equal(data.prNumber, 2)
+})
+
+test('context with explicit pr-number overrides pull_request', async assert => {
+  process.env['INPUT_PR-NUMBER'] = '99'
+
+  const { default: context } = await import('../lib/context.js')
+  const data = context()
+
+  assert.equal(data.prNumber, 99)
+
+  delete process.env['INPUT_PR-NUMBER']
 })
